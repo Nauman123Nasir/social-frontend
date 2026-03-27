@@ -22,8 +22,8 @@ export default function Home() {
     setVideoInfo(null)
 
     try {
-      // Assuming backend is running on 8000 locally
-      const response = await axios.post("http://localhost:8000/api/info", { url })
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const response = await axios.post(`${apiUrl}/api/info`, { url });
       setVideoInfo(response.data)
     } catch (err: any) {
       setError(err.response?.data?.detail || "Failed to extract video info. Please try again.")

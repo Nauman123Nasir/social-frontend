@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Download, Link as LinkIcon, Loader2, PlayCircle, AlertCircle, Instagram, Youtube, Facebook, Twitter } from "lucide-react"
+import { Download, Link as LinkIcon, Loader2, PlayCircle, AlertCircle, Instagram, Facebook, Twitter } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import axios from "axios"
@@ -51,7 +51,7 @@ export default function Home() {
           Download Any <span className="gradient-text">Video</span> Instantly
         </h1>
         <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-          The fastest way to save high-quality videos from Instagram, YouTube, Twitter, and Facebook. No watermarks, completely free.
+          The fastest way to save high-quality videos from Instagram, Twitter, and Facebook. No watermarks, completely free.
         </p>
       </div>
 
@@ -92,7 +92,6 @@ export default function Home() {
       <div className="mt-16 flex items-center gap-6 justify-center flex-wrap">
         {[
           { name: 'Instagram', icon: Instagram, color: 'text-pink-500', bg: 'bg-pink-500/10' },
-          { name: 'YouTube', icon: Youtube, color: 'text-red-500', bg: 'bg-red-500/10' },
           { name: 'Facebook', icon: Facebook, color: 'text-blue-600', bg: 'bg-blue-600/10' },
           { name: 'Twitter', icon: Twitter, color: 'text-sky-400', bg: 'bg-sky-400/10' }
         ].map((platform) => (

@@ -138,7 +138,7 @@ export default function Home() {
                                 <span className="text-xs text-gray-500 uppercase">{format.ext}</span>
                             </div>
                             <Button size="sm" asChild className="rounded-lg font-semibold shadow-lg shadow-primary/20">
-                                <a href={format.url} target="_blank" rel="noopener noreferrer" download>
+                                <a href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(format.url)}&title=${encodeURIComponent(videoInfo.title || 'video')}&ext=${encodeURIComponent(format.ext || 'mp4')}`} download>
                                     <Download className="h-4 w-4 mr-2" /> Download
                                 </a>
                             </Button>

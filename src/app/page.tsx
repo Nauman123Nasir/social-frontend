@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Download, Link as LinkIcon, Loader2, PlayCircle, AlertCircle, Instagram, Youtube, Facebook, Twitter } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,6 +12,16 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [videoInfo, setVideoInfo] = useState<any>(null)
+  const resultsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (videoInfo && resultsRef.current) {
+      // Add a tiny delay to ensure the DOM is fully painted before scrolling
+      setTimeout(() => {
+        resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 100)
+    }
+  }, [videoInfo])
 
   const handleExtract = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -101,7 +111,7 @@ export default function Home() {
 
       {/* Results Area */}
       {videoInfo && (
-        <div className="mt-16 w-full max-w-4xl grid md:grid-cols-2 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div ref={resultsRef} className="mt-16 w-full max-w-4xl grid md:grid-cols-2 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Thumbnail */}
             <div className="rounded-2xl overflow-hidden glass-effect border-white/10 relative aspect-video group">
                 {videoInfo.thumbnail ? (

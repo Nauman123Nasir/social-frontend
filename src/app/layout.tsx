@@ -41,7 +41,9 @@ export default function RootLayout({
                     <p>&copy; {new Date().getFullYear()} Social Video Downloader. All rights reserved.</p>
                     <div className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2">
                         <a href="/privacy" className="hover:text-white transition">Privacy Policy</a>
+                        <a href="/cookie-policy" className="hover:text-white transition">Cookie Policy</a>
                         <a href="/terms" className="hover:text-white transition">Terms of Service</a>
+                        <a href="/disclaimer" className="hover:text-white transition">Disclaimer</a>
                         <a href="/dmca" className="hover:text-white transition">DMCA Policy</a>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About Us - Social Video Downloader',
-  description: 'Learn more about Social Video Downloader, your free tool for downloading videos from TikTok, Instagram, Twitter, and more.',
+  description: 'Learn more about Social Video Downloader, your free tool for downloading videos from Instagram, Twitter, Facebook, and more.',
 };
 
 export default function AboutPage() {
@@ -19,7 +19,7 @@ export default function AboutPage() {
 
         <h2 className="text-2xl font-semibold text-white mt-12 mb-4">Why Choose Us?</h2>
         <ul className="list-disc pl-6 space-y-2">
-          <li><strong>Universal Compatibility:</strong> Whether it's a funny TikTok, an inspiring Instagram Reel, or a newsworthy Twitter clip, we support it all.</li>
+          <li><strong>Universal Compatibility:</strong> Whether it's a viral Facebook post, an inspiring Instagram Reel, or a newsworthy Twitter clip, we support it all.</li>
           <li><strong>High Quality:</strong> We extract the highest possible resolution available so you never compromise on quality.</li>
           <li><strong>No Watermarks:</strong> Keep the aesthetic clean. Our tool downloads the raw video file without intrusive logos.</li>
           <li><strong>Lightning Fast:</strong> No waiting in queues. Just paste the link and get your download options instantly.</li>

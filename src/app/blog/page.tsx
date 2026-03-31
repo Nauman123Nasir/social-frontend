@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 const posts = [
   {
     id: 1,
-    title: "How to Download TikTok Videos Without Watermark",
-    excerpt: "A complete guide on saving TikToks to your camera roll easily, securely, and completely free of the bouncing logo.",
-    date: "Mars 2, 2026",
-    slug: "download-tiktok-no-watermark"
+    title: "How to Download Facebook Videos in HD",
+    excerpt: "A complete guide on saving Facebook videos to your camera roll easily, securely, and completely free.",
+    date: "March 10, 2026",
+    slug: "download-facebook-hd-videos"
   },
   {
     id: 2,

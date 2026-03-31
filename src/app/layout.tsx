@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Social Video Downloader | Free HD Downloads",
-  description: "Download videos from TikTok, Facebook, YouTube, Instagram, and Twitter for free in HD quality.",
+  description: "Download videos from Facebook, Instagram, and Twitter for free in HD quality.",
 };
 
 export default function RootLayout({

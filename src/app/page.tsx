@@ -178,6 +178,74 @@ export default function Home() {
               ))}
           </div>
       </div>
+
+      {/* Detailed Features Section for SEO & Readability */}
+      <div className="mt-32 w-full max-w-5xl">
+          <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold mb-4">Why Choose Our Downloader?</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-primary to-purple-500 mx-auto rounded-full mb-8"></div>
+              <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                Social Video Downloader is the ultimate tool for saving your favorite moments from social media. Our platform is built for speed, quality, and ease of use.
+              </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-12">
+              <div className="space-y-4">
+                  <h3 className="text-2xl font-bold text-white">High Definition Quality</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    We ensure that every video you download retains its original quality. Whether it's 1080p, 4K, or standard definition, our algorithm extracts the highest available resolution from the source platforms like Instagram, Twitter, and Facebook. Say goodbye to pixelated downloads and experience crystal-clear offline viewing.
+                  </p>
+              </div>
+              <div className="space-y-4">
+                  <h3 className="text-2xl font-bold text-white">Fast, Free, and Unlimited</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    Unlike other web utility tools, we don't put a cap on your downloads. Enjoy unlimited high-speed fetching without ever needing to pull out a credit card or register an account. Our servers are optimized to fetch video metadata and download links in mere seconds, ensuring a seamless user experience every time.
+                  </p>
+              </div>
+              <div className="space-y-4">
+                  <h3 className="text-2xl font-bold text-white">No Watermarks</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    We understand how annoying platform watermarks can be. Whenever possible through the API, our downloader retrieves the raw, watermark-free version of the video. This makes it perfect for content creators, meme pages, and personal archives where pristine video files are preferred.
+                  </p>
+              </div>
+               <div className="space-y-4">
+                  <h3 className="text-2xl font-bold text-white">Cross-Platform Compatibility</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    This is a web-based utility, which means it works effortlessly on any device. Whether you are using an iPhone, an Android smartphone, a Windows PC, or a Mac, all you need is a web browser. There is no software to install, mitigating the risk of malware and saving your device's storage space.
+                  </p>
+              </div>
+          </div>
+      </div>
+
+      {/* FAQ Section for SEO */}
+      <div className="mt-32 w-full max-w-4xl mb-20">
+          <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-primary to-purple-500 mx-auto rounded-full"></div>
+          </div>
+
+          <div className="space-y-6">
+              <div className="p-6 rounded-2xl glass-effect border-white/5">
+                  <h3 className="text-xl font-bold text-white mb-2">Is Social Video Downloader free to use?</h3>
+                  <p className="text-gray-400">Yes, our video downloader is 100% free to use. There are no hidden fees, subscription models, or premium tiers. You can download as many videos as you like without spending a dime.</p>
+              </div>
+              
+              <div className="p-6 rounded-2xl glass-effect border-white/5">
+                  <h3 className="text-xl font-bold text-white mb-2">Do you keep a copy of the downloaded videos?</h3>
+                  <p className="text-gray-400">No, we do not store or host any of the videos you download on our servers. Our tool simply acts as an intermediary, providing a direct download link from the original platform's servers directly to your device. This ensures your privacy and adheres to copyright policies.</p>
+              </div>
+              
+              <div className="p-6 rounded-2xl glass-effect border-white/5">
+                  <h3 className="text-xl font-bold text-white mb-2">Which platforms are supported?</h3>
+                  <p className="text-gray-400">Currently, our primary support includes Instagram (Reels, IGTV, Posts), Twitter/X (Videos and GIFs), and Facebook (Public Video Posts). We are constantly working on updates to support more networks in the future.</p>
+              </div>
+
+               <div className="p-6 rounded-2xl glass-effect border-white/5">
+                  <h3 className="text-xl font-bold text-white mb-2">Is it legal to download videos?</h3>
+                  <p className="text-gray-400">Downloading publicly available videos for personal, offline viewing is generally acceptable. However, reproducing, distributing, or monetizing copyrighted content without the explicit permission of the creator is strictly prohibited. Please respect the intellectual property rights of the content owners.</p>
+              </div>
+          </div>
+      </div>
     </div>
   )
 }

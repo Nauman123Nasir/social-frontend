@@ -106,33 +106,35 @@ export default function Home() {
             <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
             <Input 
               type="url"
-              placeholder="Paste social media video link here..."
-              className="pl-10 pr-32 h-14 text-lg bg-black/50 border-white/20 focus:border-primary/50 text-white rounded-xl"
+              placeholder="Enter social media video link here..."
+              className="pl-10 h-14 text-lg bg-black/50 border-white/20 focus:border-primary/50 text-white rounded-xl"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               required
             />
+
             <AnimatePresence>
               {showPasteButton && !url && (
                 <motion.div
-                  initial={{ opacity: 0, x: 20, scale: 0.95 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  exit={{ opacity: 0, x: 20, scale: 0.95 }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2"
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  className="absolute -top-12 right-0 z-20"
                 >
                   <Button 
                     type="button"
                     onClick={handlePaste}
                     variant="ghost"
                     size="sm"
-                    className="h-10 px-3 bg-primary/20 hover:bg-primary/30 text-primary border border-primary/20 rounded-lg font-bold text-xs"
+                    className="h-9 px-4 bg-primary/20 hover:bg-primary/30 text-primary border border-primary/40 rounded-full font-bold text-xs shadow-lg shadow-primary/20 backdrop-blur-md transition-all duration-300"
                   >
                     <Clipboard className="h-3.5 w-3.5 mr-1.5" />
-                    Paste Link
+                    Found Link: Paste?
                   </Button>
                 </motion.div>
               )}
             </AnimatePresence>
+
           </div>
           <Button 
             type="submit" 

@@ -208,16 +208,18 @@ export default function Home() {
                 <div className="space-y-3 flex-1 overflow-y-auto pr-2 max-h-[300px] custom-scrollbar">
                     {/* Filter out messy resolutions, keeping logic simple for demo */}
                     {videoInfo.formats.slice(0, 5).map((format: any, idx: number) => (
-                        <div key={idx} className="flex items-center md:justify-end rounded-xl hover:bg-white/5 border border-white/5 transition-colors group p-1">
-                            <Button size="lg" asChild className="w-full md:w-1/3 rounded-xl font-bold px-6 shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
-                                <a href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(format.url)}&title=${encodeURIComponent(videoInfo.title || 'video')}&ext=${encodeURIComponent(format.ext || 'mp4')}`} download className="flex items-center justify-center">
-                                    <Download className="h-5 w-5 mr-2" /> 
-                                    <span>Download {format.resolution}</span>
+                        <div key={idx} className="flex items-center justify-between rounded-xl hover:bg-white/5 border border-white/5 transition-colors group">
+                            {/* <div className="flex flex-col">
+                                <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">{format.ext}</span>
+                                <span className="text-lg font-bold text-white/90">{format.resolution}</span>
+                            </div> */}
+                            <Button size="lg" asChild className="rounded-xl font-bold px-6 shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+                                <a href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(format.url)}&title=${encodeURIComponent(videoInfo.title || 'video')}&ext=${encodeURIComponent(format.ext || 'mp4')}`} download>
+                                    <Download className="h-5 w-5 mr-2" /> Download
                                 </a>
                             </Button>
                         </div>
                     ))}
-
 
                 </div>
             </div>

@@ -208,7 +208,7 @@ export default function Home() {
                 <div className="space-y-3 flex-1 overflow-y-auto pr-2 max-h-[300px] custom-scrollbar">
                     {/* Filter out messy resolutions, keeping logic simple for demo */}
                     {videoInfo.formats.slice(0, 5).map((format: any, idx: number) => (
-                        <div key={idx} className="flex items-center justify-between p-4 rounded-xl hover:bg-white/5 border border-white/5 transition-colors group">
+                        <div key={idx} className="flex items-center justify-between rounded-xl hover:bg-white/5 border border-white/5 transition-colors group">
                             {/* <div className="flex flex-col">
                                 <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">{format.ext}</span>
                                 <span className="text-lg font-bold text-white/90">{format.resolution}</span>

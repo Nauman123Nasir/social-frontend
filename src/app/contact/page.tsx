@@ -82,7 +82,8 @@ export default function ContactPage() {
       <div className="mt-12 text-gray-400">
         <h2 className="text-xl font-semibold text-white mb-4">Other Ways to Reach Us</h2>
         <p>
-          Email support directly at: <a href="mailto:support@socialvideodownloader.com" className="text-blue-400 hover:text-blue-300">support@socialvideodownloader.com</a>
+          Email support directly at: <a href="mailto:contact@downifi.com" className="text-blue-400 hover:text-blue-300">contact@downifi.com</a>
+
         </p>
       </div>
     </div>

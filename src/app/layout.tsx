@@ -25,11 +25,13 @@ export default function RootLayout({
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <div className="font-bold text-2xl tracking-tighter gradient-text">Downifi</div>
 
-                    <nav className="space-x-4 flex items-center text-sm hidden md:flex">
-                        <a href="/about" className="hover:text-primary transition">About</a>
-                        <a href="/blog" className="hover:text-primary transition">Blog</a>
-                        <a href="/contact" className="hover:text-primary transition">Contact</a>
+                    <nav className="space-x-6 flex items-center text-sm hidden md:flex">
+                        <a href="/" className="hover:text-primary transition font-medium">Home</a>
+                        <a href="/about" className="hover:text-primary transition font-medium">About</a>
+                        <a href="/blog" className="hover:text-primary transition font-medium">Blog</a>
+                        <a href="/contact" className="hover:text-primary transition font-medium">Contact</a>
                     </nav>
+
                 </div>
             </header>
             

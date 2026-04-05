@@ -1,17 +1,19 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Download, Link as LinkIcon, Loader2, PlayCircle, AlertCircle, Instagram, Facebook, Twitter } from "lucide-react"
+import { Download, Link as LinkIcon, Loader2, PlayCircle, AlertCircle, Instagram, Facebook, Twitter, Clipboard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import axios from "axios"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
 export default function Home() {
   const [url, setUrl] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [videoInfo, setVideoInfo] = useState<any>(null)
+  const [showPasteButton, setShowPasteButton] = useState(false)
+  const [clipboardText, setClipboardText] = useState("")
   const resultsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -22,6 +24,48 @@ export default function Home() {
       }, 100)
     }
   }, [videoInfo])
+
+  const validateUrl = (text: string) => {
+    const socialPatterns = [/instagram\.com/, /facebook\.com/, /twitter\.com/, /x\.com/, /fb\.watch/];
+    return socialPatterns.some(pattern => pattern.test(text.toLowerCase()));
+  }
+
+  const checkClipboard = async () => {
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.readText) return;
+      
+      // We only want to check if the input is currently empty
+      if (url) {
+        setShowPasteButton(false);
+        return;
+      }
+
+      const text = await navigator.clipboard.readText();
+      if (text && validateUrl(text)) {
+        setClipboardText(text);
+        setShowPasteButton(true);
+      } else {
+        setShowPasteButton(false);
+      }
+    } catch (err) {
+      // Clipboard access might be denied
+      setShowPasteButton(false);
+    }
+  }
+
+  useEffect(() => {
+    // Check clipboard on focus and mount
+    const handleFocus = () => checkClipboard();
+    window.addEventListener('focus', handleFocus);
+    checkClipboard();
+
+    return () => window.removeEventListener('focus', handleFocus);
+  }, [url]);
+
+  const handlePaste = () => {
+    setUrl(clipboardText);
+    setShowPasteButton(false);
+  }
 
   const handleExtract = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -63,11 +107,32 @@ export default function Home() {
             <Input 
               type="url"
               placeholder="Paste social media video link here..."
-              className="pl-10 h-14 text-lg bg-black/50 border-white/20 focus:border-primary/50 text-white rounded-xl"
+              className="pl-10 pr-32 h-14 text-lg bg-black/50 border-white/20 focus:border-primary/50 text-white rounded-xl"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               required
             />
+            <AnimatePresence>
+              {showPasteButton && !url && (
+                <motion.div
+                  initial={{ opacity: 0, x: 20, scale: 0.95 }}
+                  animate={{ opacity: 1, x: 0, scale: 1 }}
+                  exit={{ opacity: 0, x: 20, scale: 0.95 }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2"
+                >
+                  <Button 
+                    type="button"
+                    onClick={handlePaste}
+                    variant="ghost"
+                    size="sm"
+                    className="h-10 px-3 bg-primary/20 hover:bg-primary/30 text-primary border border-primary/20 rounded-lg font-bold text-xs"
+                  >
+                    <Clipboard className="h-3.5 w-3.5 mr-1.5" />
+                    Paste Link
+                  </Button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
           <Button 
             type="submit" 

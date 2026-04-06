@@ -197,56 +197,56 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Formats */}
-            <div className="flex flex-col">
-                <h2 className="text-2xl font-bold mb-4 line-clamp-2 text-white/90">{videoInfo.title}</h2>
-                <div className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-6 self-start">
-                    {videoInfo.platform}
-                </div>
-                
-                {/* Formats Section */}
-                <div className="flex-1 flex flex-col min-h-0">
+            {/* Formats Section */}
+            <div className="flex-1 flex flex-col justify-center min-w-0">
                     {videoInfo.formats && videoInfo.formats.length > 0 ? (
-                        <div className="mb-6 h-full flex flex-col justify-center">
-                            <div className="text-xs font-bold text-primary uppercase tracking-widest mb-3 flex items-center">
-                                <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse"></span>
-                                Best Quality Available
+                        <div className="flex flex-col gap-5">
+                            <div>
+                                <div className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-2 flex items-center">
+                                    <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2 animate-pulse shadow-[0_0_8px_rgba(var(--primary-rgb),0.8)]"></span>
+                                    Ready to Download
+                                </div>
+                                <h2 className="text-xl font-bold text-white/90 line-clamp-1 leading-tight">{videoInfo.title}</h2>
+                                <div className="mt-1 flex items-center gap-2">
+                                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{videoInfo.platform}</span>
+                                    <span className="w-1 h-1 bg-gray-700 rounded-full"></span>
+                                    <span className="text-[10px] font-bold text-primary/70 uppercase tracking-widest">High Quality</span>
+                                </div>
                             </div>
-                            <div className="p-8 rounded-3xl bg-primary/10 border border-primary/20 flex flex-col items-center text-center gap-6 group transition-all hover:bg-primary/15 shadow-2xl shadow-primary/5">
+
+                            <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col items-center text-center gap-5 transition-all hover:bg-white/[0.05] hover:border-primary/20 group">
                                 <div className="flex flex-col items-center">
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <span className="text-5xl font-black text-white">{videoInfo.formats[0].resolution}</span>
-                                        <div className="flex flex-col items-start">
-                                            <span className="px-2 py-0.5 rounded-md bg-primary text-black text-[10px] font-black uppercase">ULTRA HD</span>
-                                            <span className="text-[10px] font-bold text-gray-500 uppercase">{videoInfo.formats[0].ext}</span>
-                                        </div>
+                                    <div className="flex items-baseline gap-2 mb-1">
+                                        <span className="text-3xl font-black text-white tracking-tight">{videoInfo.formats[0].resolution}</span>
+                                        <span className="text-xs font-bold text-gray-500 uppercase">{videoInfo.formats[0].ext}</span>
                                     </div>
                                     {videoInfo.formats[0].filesize && (
-                                        <span className="text-sm font-bold text-gray-500 bg-white/5 px-3 py-1 rounded-full border border-white/5">
-                                            Size: {(videoInfo.formats[0].filesize / 1048576).toFixed(1)} MB
+                                        <span className="text-[10px] font-bold text-gray-400 bg-white/5 px-2 py-0.5 rounded-md">
+                                            {(videoInfo.formats[0].filesize / 1048576).toFixed(1)} MB
                                         </span>
                                     )}
                                 </div>
-                                <Button size="lg" asChild className="w-full rounded-2xl font-bold px-10 py-8 h-auto shadow-2xl shadow-primary/40 hover:scale-[1.02] active:scale-95 transition-all bg-primary hover:bg-primary/90 text-black">
+                                
+                                <Button size="lg" asChild className="w-full rounded-xl font-bold px-8 py-6 h-auto shadow-lg shadow-primary/10 hover:scale-[1.01] active:scale-95 transition-all bg-primary hover:bg-primary/90 text-black">
                                     <a href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(videoInfo.formats[0].url)}&title=${encodeURIComponent(videoInfo.title || 'video')}&ext=${encodeURIComponent(videoInfo.formats[0].ext || 'mp4')}`} download>
-                                        <Download className="h-7 w-7 mr-3" /> Download High Quality
+                                        <Download className="h-5 w-5 mr-2" /> Download Video
                                     </a>
                                 </Button>
-                                <p className="text-xs text-gray-400 max-w-[250px]">
-                                    Extracted directly from {videoInfo.platform}. No watermarks included.
+                                
+                                <p className="text-[10px] text-gray-500 font-medium">
+                                    Full quality extraction • No watermarks
                                 </p>
                             </div>
                         </div>
                     ) : (
-                        <div className="p-8 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 flex flex-col items-center justify-center text-center">
-                            <AlertCircle className="h-10 w-10 mb-2 opacity-50" />
-                            <p className="font-bold">No High Quality Formats Found</p>
-                            <p className="text-xs opacity-70 mt-1 text-gray-400">Try a different link or check back later.</p>
+                        <div className="p-6 rounded-2xl bg-yellow-500/5 border border-yellow-500/10 text-yellow-500/80 flex flex-col items-center justify-center text-center">
+                            <AlertCircle className="h-8 w-8 mb-2 opacity-40" />
+                            <p className="font-bold text-sm">No formats found</p>
+                            <p className="text-[10px] opacity-60 mt-1">Check the URL and try again.</p>
                         </div>
                     )}
                 </div>
             </div>
-        </div>
       )}
 
       {/* Feature Section / Placeholder for Ads */}
@@ -309,7 +309,7 @@ export default function Home() {
       </div>
 
       {/* FAQ Section for SEO */}
-      <div className="mt-32 w-full max-w-4xl mb-20">
+      <div className="mt-32 w-full max-w-4xl mb-10">
           <div className="text-center mb-16">
               <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
               <div className="w-24 h-1 bg-gradient-to-r from-primary to-purple-500 mx-auto rounded-full"></div>

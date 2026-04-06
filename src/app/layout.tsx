@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 import CookieConsent from "../components/CookieConsent";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,7 +24,9 @@ export default function RootLayout({
             {/* Header placeholder */}
             <header className="border-b border-white/10 glass-effect sticky top-0 z-50">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                    <div className="font-bold text-2xl tracking-tighter gradient-text">Downifi</div>
+                    <Link href="/" className="font-bold text-2xl tracking-tighter gradient-text hover:opacity-80 transition-opacity">
+                        Downifi
+                    </Link>
 
                     <nav className="space-x-6 flex items-center text-sm hidden md:flex">
                         <a href="/" className="hover:text-primary transition font-medium">Home</a>

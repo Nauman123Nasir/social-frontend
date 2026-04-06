@@ -262,10 +262,14 @@ export default function Home() {
                             </div>
                         </div>
                     ) : (
-                        <div className="p-6 rounded-2xl bg-yellow-500/5 border border-yellow-500/10 text-yellow-500/80 flex flex-col items-center justify-center text-center">
-                            <AlertCircle className="h-8 w-8 mb-2 opacity-40" />
-                            <p className="font-bold text-sm">No formats found</p>
-                            <p className="text-[10px] opacity-60 mt-1">Check the URL and try again.</p>
+                        <div className="p-8 rounded-3xl bg-amber-500/5 border border-amber-500/10 text-amber-200/70 flex flex-col items-center justify-center text-center shadow-xl shadow-amber-900/5 animate-in fade-in zoom-in duration-300">
+                            <div className="bg-amber-500/10 p-3 rounded-2xl mb-4">
+                                <AlertCircle className="h-8 w-8 text-amber-500" />
+                            </div>
+                            <h3 className="font-bold text-lg text-amber-500 mb-2 tracking-tight">No Video Found</h3>
+                            <p className="text-xs font-medium leading-relaxed max-w-[200px] mx-auto opacity-80 italic">
+                                This link might point to a photo, a text post, or a private profile. We only support public video content.
+                            </p>
                         </div>
                     )}
                 </div>

@@ -204,23 +204,46 @@ export default function Home() {
                     {videoInfo.platform}
                 </div>
                 
-                {/* <h3 className="font-semibold text-gray-400 mb-3 text-sm uppercase tracking-wider">Available Formats</h3> */}
-                <div className="space-y-3 flex-1 overflow-y-auto pr-2 max-h-[300px] custom-scrollbar">
-                    {/* Filter out messy resolutions, keeping logic simple for demo */}
-                    {videoInfo.formats.slice(0, 5).map((format: any, idx: number) => (
-                        <div key={idx} className="flex items-center justify-between rounded-xl hover:bg-white/5 border border-white/5 transition-colors group">
-                            {/* <div className="flex flex-col">
-                                <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">{format.ext}</span>
-                                <span className="text-lg font-bold text-white/90">{format.resolution}</span>
-                            </div> */}
-                            <Button size="lg" asChild className="rounded-xl font-bold px-6 shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
-                                <a href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(format.url)}&title=${encodeURIComponent(videoInfo.title || 'video')}&ext=${encodeURIComponent(format.ext || 'mp4')}`} download>
-                                    <Download className="h-5 w-5 mr-2" /> Download
-                                </a>
-                            </Button>
+                {/* Formats Section */}
+                <div className="flex-1 flex flex-col min-h-0">
+                    {videoInfo.formats && videoInfo.formats.length > 0 ? (
+                        <div className="mb-6 h-full flex flex-col justify-center">
+                            <div className="text-xs font-bold text-primary uppercase tracking-widest mb-3 flex items-center">
+                                <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse"></span>
+                                Best Quality Available
+                            </div>
+                            <div className="p-8 rounded-3xl bg-primary/10 border border-primary/20 flex flex-col items-center text-center gap-6 group transition-all hover:bg-primary/15 shadow-2xl shadow-primary/5">
+                                <div className="flex flex-col items-center">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <span className="text-5xl font-black text-white">{videoInfo.formats[0].resolution}</span>
+                                        <div className="flex flex-col items-start">
+                                            <span className="px-2 py-0.5 rounded-md bg-primary text-black text-[10px] font-black uppercase">ULTRA HD</span>
+                                            <span className="text-[10px] font-bold text-gray-500 uppercase">{videoInfo.formats[0].ext}</span>
+                                        </div>
+                                    </div>
+                                    {videoInfo.formats[0].filesize && (
+                                        <span className="text-sm font-bold text-gray-500 bg-white/5 px-3 py-1 rounded-full border border-white/5">
+                                            Size: {(videoInfo.formats[0].filesize / 1048576).toFixed(1)} MB
+                                        </span>
+                                    )}
+                                </div>
+                                <Button size="lg" asChild className="w-full rounded-2xl font-bold px-10 py-8 h-auto shadow-2xl shadow-primary/40 hover:scale-[1.02] active:scale-95 transition-all bg-primary hover:bg-primary/90 text-black">
+                                    <a href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(videoInfo.formats[0].url)}&title=${encodeURIComponent(videoInfo.title || 'video')}&ext=${encodeURIComponent(videoInfo.formats[0].ext || 'mp4')}`} download>
+                                        <Download className="h-7 w-7 mr-3" /> Download High Quality
+                                    </a>
+                                </Button>
+                                <p className="text-xs text-gray-400 max-w-[250px]">
+                                    Extracted directly from {videoInfo.platform}. No watermarks included.
+                                </p>
+                            </div>
                         </div>
-                    ))}
-
+                    ) : (
+                        <div className="p-8 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 flex flex-col items-center justify-center text-center">
+                            <AlertCircle className="h-10 w-10 mb-2 opacity-50" />
+                            <p className="font-bold">No High Quality Formats Found</p>
+                            <p className="text-xs opacity-70 mt-1 text-gray-400">Try a different link or check back later.</p>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

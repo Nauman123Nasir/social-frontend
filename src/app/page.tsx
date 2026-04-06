@@ -71,6 +71,13 @@ export default function Home() {
     e.preventDefault()
     if (!url) return
 
+    // Pre-flight Validation
+    if (!validateUrl(url)) {
+      setError("Please enter a valid Instagram, Facebook, or Twitter/X video link. Other platforms are not supported yet.")
+      setVideoInfo(null)
+      return
+    }
+
     setIsLoading(true)
     setError("")
     setVideoInfo(null)
@@ -80,7 +87,7 @@ export default function Home() {
       const response = await axios.post(`${apiUrl}/api/info`, { url });
       setVideoInfo(response.data)
     } catch (err: any) {
-      setError(err.response?.data?.detail || "Failed to extract video info. Please try again.")
+      setError(err.response?.data?.detail || "Failed to extract video info. Please verify the link and try again.")
     } finally {
       setIsLoading(false)
     }
@@ -147,12 +154,24 @@ export default function Home() {
         </form>
 
         {/* Error State */}
-        {error && (
-            <div className="mt-4 p-4 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive flex items-center">
-                <AlertCircle className="h-5 w-5 mr-2 flex-shrink-0" />
-                <p className="text-sm">{error}</p>
-            </div>
-        )}
+        <AnimatePresence>
+          {error && (
+              <motion.div 
+                initial={{ opacity: 0, y: -10, height: 0 }}
+                animate={{ opacity: 1, y: 0, height: 'auto' }}
+                exit={{ opacity: 0, y: -10, height: 0 }}
+                className="mt-6 p-4 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive flex items-start shadow-lg shadow-destructive/5 overflow-hidden"
+              >
+                  <div className="bg-destructive/20 p-2 rounded-lg mr-3 flex-shrink-0">
+                    <AlertCircle className="h-5 w-5" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-bold text-sm mb-0.5">Extraction Error</span>
+                    <p className="text-xs font-medium leading-relaxed opacity-90">{error}</p>
+                  </div>
+              </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Platform Icons */}

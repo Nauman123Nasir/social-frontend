@@ -134,6 +134,7 @@ export default function Home() {
                     variant="ghost"
                     size="sm"
                     className="h-9 px-4 bg-primary/20 hover:bg-primary/30 text-primary border border-primary/40 rounded-full font-bold text-xs shadow-lg shadow-primary/20 backdrop-blur-md transition-all duration-300"
+                    suppressHydrationWarning
                   >
                     <Clipboard className="h-3.5 w-3.5 mr-1.5" />
                     Found Link: Paste?
@@ -147,6 +148,7 @@ export default function Home() {
             type="submit" 
             className="h-14 px-8 text-lg font-bold rounded-xl bg-primary hover:bg-primary/80 transition-all duration-200"
             disabled={isLoading}
+            suppressHydrationWarning
           >
             {isLoading ? <Loader2 className="animate-spin h-5 w-5 mr-2" /> : <Download className="h-5 w-5 mr-2" />}
             {isLoading ? "Processing..." : "Download"}
@@ -246,7 +248,7 @@ export default function Home() {
                                     )}
                                 </div>
                                 
-                                <Button size="lg" asChild className="w-full rounded-xl font-bold px-6 py-4 h-auto shadow-lg shadow-primary/10 hover:scale-[1.01] active:scale-95 transition-all bg-primary hover:bg-primary/90 text-black">
+                                <Button size="lg" asChild className="w-full rounded-xl font-bold px-6 py-4 h-auto shadow-lg shadow-primary/10 hover:scale-[1.01] active:scale-95 transition-all bg-primary hover:bg-primary/90 text-black" suppressHydrationWarning>
                                     <a 
                                         href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(videoInfo.formats[0].url)}&title=${encodeURIComponent(videoInfo.title || 'video')}&ext=${encodeURIComponent(videoInfo.formats[0].ext || 'mp4')}`} 
                                         download

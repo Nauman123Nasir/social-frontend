@@ -154,20 +154,20 @@ export default function Home() {
         </form>
 
         {/* Error State */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {error && (
               <motion.div 
-                initial={{ opacity: 0, y: -10, height: 0 }}
-                animate={{ opacity: 1, y: 0, height: 'auto' }}
-                exit={{ opacity: 0, y: -10, height: 0 }}
-                className="mt-6 p-4 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive flex items-start shadow-lg shadow-destructive/5 overflow-hidden"
+                initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                className="mt-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-100 flex items-start shadow-[0_0_20px_rgba(239,68,68,0.1)] overflow-hidden animate-pulse-subtle"
               >
-                  <div className="bg-destructive/20 p-2 rounded-lg mr-3 flex-shrink-0">
-                    <AlertCircle className="h-5 w-5" />
+                  <div className="bg-red-500/20 p-2.5 rounded-xl mr-4 flex-shrink-0 border border-red-500/20">
+                    <AlertCircle className="h-5 w-5 text-red-500" />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="font-bold text-sm mb-0.5">Extraction Error</span>
-                    <p className="text-xs font-medium leading-relaxed opacity-90">{error}</p>
+                  <div className="flex flex-col py-0.5">
+                    <span className="font-bold text-sm mb-1 text-red-500 tracking-tight">Extraction Failed</span>
+                    <p className="text-xs font-semibold leading-relaxed text-red-200/90">{error}</p>
                   </div>
               </motion.div>
           )}

@@ -316,7 +316,7 @@ export default function Home() {
               {[
                   { title: "1. Copy Link", desc: "Find the video you want to download and copy its share URL." },
                   { title: "2. Paste URL", desc: "Paste the copied link into the input box at the top of this page." },
-                  { title: "3. Download", desc: "Choose your preferred quality format and save the video directly." }
+                  { title: "3. Download", desc: "Click download and save the high-quality video directly to your device." }
               ].map((step, i) => (
                   <div key={i} className="p-8 rounded-2xl glass-effect border-white/5 hover:-translate-y-2 transition-transform duration-300">
                       <h3 className="text-xl font-bold mb-3 gradient-text">{step.title}</h3>
@@ -328,11 +328,11 @@ export default function Home() {
 
       {/* Detailed Features Section for SEO & Readability */}
       <div className="mt-32 w-full max-w-5xl">
-          <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4">Why Choose Our Downloader?</h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-primary to-purple-500 mx-auto rounded-full mb-8"></div>
-              <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-                Social Video Downloader is the ultimate tool for saving your favorite moments from social media. Our platform is built for speed, quality, and ease of use.
+          <div className="text-center mb-16 px-4">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">World Class Social Video Downloader</h2>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-primary to-purple-500 mx-auto rounded-full mb-10"></div>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                Downifi is the web's most reliable tool for saving high-resolution videos from TikTok, Instagram, Twitter (X), and Facebook. Our platform is engineered for speed, privacy, and maximum video quality.
               </p>
           </div>
           
@@ -350,9 +350,9 @@ export default function Home() {
                   </p>
               </div>
               <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-white">No Watermarks</h3>
+                  <h3 className="text-2xl font-bold text-white">No Watermarks (TikTok & Reels)</h3>
                   <p className="text-gray-400 leading-relaxed">
-                    We understand how annoying platform watermarks can be. Whenever possible through the API, our downloader retrieves the raw, watermark-free version of the video. This makes it perfect for content creators, meme pages, and personal archives where pristine video files are preferred.
+                    We understand how annoying platform watermarks can be when trying to save a memory. Downifi specializes in retrieving the raw, watermark-free version of TikTok videos and Instagram Reels whenever possible, providing you with pristine MP4 files for your personal archive.
                   </p>
               </div>
                <div className="space-y-4">
@@ -372,24 +372,24 @@ export default function Home() {
           </div>
 
           <div className="space-y-6">
-              <div className="p-6 rounded-2xl glass-effect border-white/5">
-                  <h3 className="text-xl font-bold text-white mb-2">Is Social Video Downloader free to use?</h3>
-                  <p className="text-gray-400">Yes, our video downloader is 100% free to use. There are no hidden fees, subscription models, or premium tiers. You can download as many videos as you like without spending a dime.</p>
+              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3">Is Downifi free to use?</h3>
+                  <p className="text-gray-400">Yes, our tool is 100% free with no registration required. Download as many videos as you want from TikTok, Instagram, and more without hidden fees.</p>
               </div>
               
-              <div className="p-6 rounded-2xl glass-effect border-white/5">
-                  <h3 className="text-xl font-bold text-white mb-2">Do you keep a copy of the downloaded videos?</h3>
-                  <p className="text-gray-400">No, we do not store or host any of the videos you download on our servers. Our tool simply acts as an intermediary, providing a direct download link from the original platform's servers directly to your device. This ensures your privacy and adheres to copyright policies.</p>
+              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3">Does Downifi save a copy of my videos?</h3>
+                  <p className="text-gray-400">Absolutely not. We prioritize your privacy. Downifi does not host or store any videos. It simply processes your request and provides a direct link from the platform servers to your device storage.</p>
               </div>
               
-              <div className="p-6 rounded-2xl glass-effect border-white/5">
-                  <h3 className="text-xl font-bold text-white mb-2">Which platforms are supported?</h3>
-                  <p className="text-gray-400">Currently, our primary support includes Instagram (Reels, IGTV, Posts), Twitter/X (Videos and GIFs), and Facebook (Public Video Posts). We are constantly working on updates to support more networks in the future.</p>
+              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3">Which platforms are supported for downloads?</h3>
+                  <p className="text-gray-400">We currently support high-speed downloads for <strong>TikTok</strong> (No Watermark), <strong>Instagram</strong> (Reels & Video), <strong>Twitter (X)</strong>, and <strong>Facebook</strong>. More platforms are added regularly.</p>
               </div>
 
-               <div className="p-6 rounded-2xl glass-effect border-white/5">
-                  <h3 className="text-xl font-bold text-white mb-2">Is it legal to download videos?</h3>
-                  <p className="text-gray-400">Downloading publicly available videos for personal, offline viewing is generally acceptable. However, reproducing, distributing, or monetizing copyrighted content without the explicit permission of the creator is strictly prohibited. Please respect the intellectual property rights of the content owners.</p>
+               <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3">Is it legal to download social media videos?</h3>
+                  <p className="text-gray-400">Downloading publicly available content for personal offline viewing is generally permitted. However, you must not use these files for commercial purposes or distribution without the original creator's permission.</p>
               </div>
           </div>
       </div>

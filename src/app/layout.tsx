@@ -2,13 +2,40 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import SoftwareSchema from "../components/SoftwareSchema";
 import CookieConsent from "../components/CookieConsent";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Downifi | Social Video Downloader",
-  description: "Download videos from Facebook, Instagram, and Twitter for free in HD quality using Downifi.",
+  title: "Downifi | Free Social Video Downloader (No Watermark)",
+  description: "Download high-quality videos from Instagram, TikTok, Facebook, and Twitter (X) for free. Fast, secure, and no watermark required.",
+  metadataBase: new URL("https://downifi.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Downifi | Free Social Video Downloader",
+    description: "The fastest way to save high-quality videos from Instagram, TikTok, Facebook, and X. Completely free, no watermarks.",
+    url: "https://downifi.com",
+    siteName: "Downifi",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Downifi Social Downloader",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Downifi | Free Social Video Downloader",
+    description: "Save videos from Instagram, TikTok, and more in HD quality instantly.",
+    images: ["/og-image.png"],
+  },
   icons: {
     icon: "/fav-icon.jpeg",
     apple: "/fav-icon.jpeg",
@@ -18,7 +45,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,6 +52,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <SoftwareSchema />
+      </head>
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
             {/* Header placeholder */}

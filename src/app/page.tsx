@@ -46,16 +46,16 @@ export default function Home() {
         const text = await navigator.clipboard.readText();
         if (text) {
           setUrl(text);
-          // Auto-clear error if they paste a new link
           setError("");
           resetInputScroll();
         }
       } else {
-        alert("Your browser does not support clipboard reading. Please paste manually.");
+        setError("Clipboard access is not available in this browser. Please long-press the search box and select 'Paste'.");
       }
     } catch (err) {
-      console.error("Clipboard permission denied or failed", err);
-      alert("Please allow clipboard permissions or paste manually.");
+      // Intentionally omitting console.error to prevent the Next.js dev server overlay 
+      // from violently taking over the screen on a harmless permission exception.
+      setError("Clipboard access denied. Please long-press the search box above and select 'Paste' manually.");
     }
   }
 
@@ -101,6 +101,34 @@ export default function Home() {
 
       {/* Main Input Area */}
       <div className="w-full max-w-2xl p-6 rounded-2xl glass-effect shadow-2xl relative z-10 transition-all duration-300 hover:shadow-primary/20">
+        
+        {/* External Paste Button (Moved Above) */}
+        <AnimatePresence>
+          {!url && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              className="mb-4 flex justify-center w-full"
+            >
+              <Button 
+                type="button"
+                onClick={handlePaste}
+                variant="ghost"
+                size="sm"
+                className="group relative h-10 px-6 overflow-hidden rounded-2xl font-bold text-sm text-white shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300 active:scale-95 border border-white/15 bg-white/5 hover:bg-white/10"
+                suppressHydrationWarning
+              >
+                <span className="absolute inset-x-0 w-full h-px top-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                <div className="flex items-center justify-center relative z-10 transition-transform duration-300 group-hover:translate-x-[2px]">
+                  <Clipboard className="h-4 w-4 mr-2 text-primary group-hover:scale-110 transition-transform duration-300" />
+                  <span className="tracking-wide">Paste URL</span>
+                </div>
+              </Button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <form onSubmit={handleExtract} className="flex flex-col md:flex-row gap-3">
           <div className="relative flex-1">
             <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -108,7 +136,7 @@ export default function Home() {
               ref={inputRef}
               type="url"
               placeholder="Enter social media video link here..."
-              className="pl-10 pr-24 h-14 text-lg bg-black/50 border-white/20 focus:border-primary/50 text-white rounded-xl"
+              className="pl-10 pr-14 h-14 text-lg bg-black/50 border-white/20 focus:border-primary/50 text-white rounded-xl"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               onPaste={resetInputScroll}
@@ -116,28 +144,7 @@ export default function Home() {
             />
 
             <AnimatePresence mode="wait">
-              {!url ? (
-                <motion.div
-                  key="paste-btn"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute right-2 top-2 z-20"
-                >
-                  <Button 
-                    type="button"
-                    onClick={handlePaste}
-                    variant="ghost"
-                    size="sm"
-                    className="h-10 px-4 bg-primary/20 hover:bg-primary/30 text-primary border border-primary/40 rounded-lg font-bold text-sm backdrop-blur-md transition-all duration-300"
-                    suppressHydrationWarning
-                  >
-                    <Clipboard className="h-4 w-4 mr-2" />
-                    Paste
-                  </Button>
-                </motion.div>
-              ) : (
+              {url && (
                 <motion.div
                   key="clear-btn"
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -157,7 +164,6 @@ export default function Home() {
                 </motion.div>
               )}
             </AnimatePresence>
-
           </div>
           <Button 
             type="submit" 
@@ -169,6 +175,8 @@ export default function Home() {
             {isLoading ? "Processing..." : "Download"}
           </Button>
         </form>
+
+
 
         {/* Error State */}
         <AnimatePresence mode="wait">

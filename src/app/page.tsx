@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion"
 
 export default function Home() {
   const [url, setUrl] = useState("")
+  const [extractedUrl, setExtractedUrl] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [videoInfo, setVideoInfo] = useState<any>(null)
@@ -86,6 +87,7 @@ export default function Home() {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       const response = await axios.post(`${apiUrl}/api/info`, { url });
       setVideoInfo(response.data)
+      setExtractedUrl(url)
     } catch (err: any) {
       setError(err.response?.data?.detail || "Failed to extract video info. Please verify the link and try again.")
     } finally {
@@ -250,9 +252,8 @@ export default function Home() {
                                 
                                 <Button size="lg" asChild className="w-full rounded-xl font-bold px-6 py-4 h-auto shadow-lg shadow-primary/10 hover:scale-[1.01] active:scale-95 transition-all bg-primary hover:bg-primary/90 text-black" suppressHydrationWarning>
                                     <a 
-                                        href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(videoInfo.formats[0].url)}&title=${encodeURIComponent(videoInfo.title || 'video')}&ext=${encodeURIComponent(videoInfo.formats[0].ext || 'mp4')}&needs_merging=${videoInfo.formats[0].needs_merging || false}&original_url=${encodeURIComponent(url)}`} 
+                                        href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(videoInfo.formats[0].url)}&title=${encodeURIComponent(videoInfo.title || 'video')}&ext=${encodeURIComponent(videoInfo.formats[0].ext || 'mp4')}&needs_merging=${videoInfo.formats[0].needs_merging || false}&original_url=${encodeURIComponent(extractedUrl)}`} 
                                         download
-                                        onClick={() => setUrl("")}
                                     >
                                         <Download className="h-5 w-5 mr-2" /> Download Video
                                     </a>

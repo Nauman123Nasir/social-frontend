@@ -28,9 +28,9 @@ export default function RootLayout({
             {/* Header placeholder */}
             <header className="border-b border-white/10 glass-effect sticky top-0 z-50">
                 <div className="container mx-auto px-4 py-2 md:py-3 flex items-center justify-between">
-                    <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
+                    <Link href="/" className="flex items-center hover:opacity-80 transition-transform hover:scale-105 duration-200">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src="/logo.png" alt="Downifi Logo" className="h-16 md:h-20 w-auto object-contain" />
+                        <img src="/logo.png" alt="Downifi Logo" className="h-[84px] md:h-[104px] w-auto object-contain drop-shadow-lg" />
                     </Link>
 
                     <nav className="space-x-6 flex items-center text-sm hidden md:flex">

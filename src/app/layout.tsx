@@ -10,7 +10,8 @@ export const metadata: Metadata = {
   title: "Downifi | Social Video Downloader",
   description: "Download videos from Facebook, Instagram, and Twitter for free in HD quality using Downifi.",
   icons: {
-    icon: "/icon.png",
+    icon: "/fav-icon.jpeg",
+    apple: "/fav-icon.jpeg",
   },
 };
 
@@ -27,8 +28,9 @@ export default function RootLayout({
             {/* Header placeholder */}
             <header className="border-b border-white/10 glass-effect sticky top-0 z-50">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                    <Link href="/" className="font-bold text-2xl tracking-tighter gradient-text hover:opacity-80 transition-opacity">
-                        Downifi
+                    <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/logo.png" alt="Downifi Logo" className="h-10 w-auto" />
                     </Link>
 
                     <nav className="space-x-6 flex items-center text-sm hidden md:flex">

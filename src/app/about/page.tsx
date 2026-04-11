@@ -22,7 +22,7 @@ export default function AboutPage() {
           <li><strong>Universal Compatibility:</strong> Whether it's a viral Facebook post, an inspiring Instagram Reel, or a newsworthy Twitter clip, we support it all.</li>
           <li><strong>High Quality:</strong> We extract the highest possible resolution available so you never compromise on quality.</li>
           <li><strong>No Watermarks:</strong> Keep the aesthetic clean. Our tool downloads the raw video file without intrusive logos.</li>
-          <li><strong>Lightning Fast:</strong> No waiting in queues. Just paste the link and get your download options instantly.</li>
+          <li><strong>Lightning Fast:</strong> No waiting in queues. Just paste the link and get your download link instantly.</li>
         </ul>
 
         <h2 className="text-2xl font-semibold text-white mt-12 mb-4">Our Commitment</h2>

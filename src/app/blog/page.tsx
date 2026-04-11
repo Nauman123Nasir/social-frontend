@@ -1,62 +1,59 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Clock } from 'lucide-react';
+import { posts } from '@/lib/blog-content';
 
 export const metadata: Metadata = {
-  title: 'Blog - Social Video Downloader Tips',
-  description: 'Tips, tricks, and guides on how to download and save social media videos from any platform.',
+  title: 'Blog - Social Video Downloading Guides & Tips',
+  description: 'The ultimate collection of guides, tutorials, and tips on how to save high-quality social media videos from Instagram, TikTok, and more.',
 };
-
-// Mock data for blog posts (essential for SEO)
-const posts = [
-  {
-    id: 1,
-    title: "How to Download Facebook Videos in HD",
-    excerpt: "A complete guide on saving Facebook videos to your camera roll easily, securely, and completely free.",
-    date: "March 10, 2026",
-    slug: "download-facebook-hd-videos"
-  },
-  {
-    id: 2,
-    title: "Saving Instagram Reels to Your Phone in 3 Steps",
-    excerpt: "Found a recipe or workout you want to keep? Here is how to legally save Instagram Reels for offline viewing.",
-    date: "Feb 28, 2026",
-    slug: "save-instagram-reels"
-  },
-  {
-    id: 3,
-    title: "The Ultimate Guide to Archiving Twitter Videos",
-    excerpt: "Twitter moves fast. Learn how to archive important video clips from X (formerly Twitter) before they get deleted.",
-    date: "Feb 15, 2026",
-    slug: "archive-twitter-videos"
-  }
-];
 
 export default function BlogPage() {
   return (
-    <div className="container mx-auto px-4 py-20 max-w-5xl">
-      <div className="text-center mb-16">
-        <h1 className="text-5xl font-bold mb-8 gradient-text leading-tight pb-2">Video Downloading Tips</h1>
+    <div className="container mx-auto px-4 py-24 max-w-6xl">
+      <div className="text-center mb-20 animate-fade-in">
+        <h1 className="text-5xl md:text-7xl font-extrabold mb-8 gradient-text leading-tight pb-2">
+          Master the <span className="text-white">Download</span>
+        </h1>
 
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-          Learn the best ways to manage, convert, and save content from all your favorite social media platforms.
+        <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          Expert guides, security tips, and the fastest workflows for archiving your favorite content from across the social web.
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 gap-8">
         {posts.map((post) => (
-          <article key={post.id} className="group p-6 rounded-2xl glass-effect border-white/5 hover:border-primary/50 transition-colors flex flex-col">
-            <div className="text-sm text-primary mb-3 font-semibold">{post.date}</div>
-            <h2 className="text-2xl font-bold mb-3 text-white group-hover:text-primary transition-colors">
+          <Link 
+            key={post.id} 
+            href={`/blog/${post.slug}`}
+            className="group relative p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/30 transition-all duration-500 flex flex-col hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.1)] overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-10 transition-opacity">
+              <ArrowRight className="h-24 w-24 -rotate-45" />
+            </div>
+            
+            <div className="flex items-center gap-4 mb-6">
+              <div className="text-sm font-bold px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+                {post.date}
+              </div>
+              <div className="flex items-center text-xs text-gray-500 font-medium uppercase tracking-widest">
+                <Clock className="mr-2 h-3.5 w-3.5" />
+                {post.readTime}
+              </div>
+            </div>
+
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white group-hover:text-primary transition-colors leading-snug">
               {post.title}
             </h2>
-            <p className="text-gray-400 mb-6 flex-1 line-clamp-3">
+            
+            <p className="text-gray-400 mb-8 flex-1 leading-relaxed text-lg line-clamp-3">
               {post.excerpt}
             </p>
-            <div className="flex items-center text-white/80 font-medium group-hover:text-white mt-auto">
-              Read Article <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+
+            <div className="flex items-center text-primary font-bold group-hover:gap-3 transition-all">
+              Read Full Guide <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </div>

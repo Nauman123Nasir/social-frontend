@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Download, Link as LinkIcon, Loader2, PlayCircle, AlertCircle, Instagram, Facebook, Twitter, Clipboard } from "lucide-react"
+import { Download, Link as LinkIcon, Loader2, PlayCircle, AlertCircle, Instagram, Facebook, Twitter, Clipboard, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import axios from "axios"
@@ -14,6 +14,17 @@ export default function Home() {
   const [error, setError] = useState("")
   const [videoInfo, setVideoInfo] = useState<any>(null)
   const resultsRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const resetInputScroll = () => {
+    // A tiny timeout allows the browser to finish its native paste/render cycle first
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.scrollLeft = 0;
+        inputRef.current.setSelectionRange(0, 0);
+      }
+    }, 10);
+  }
 
   useEffect(() => {
     if (videoInfo && resultsRef.current) {
@@ -25,7 +36,7 @@ export default function Home() {
   }, [videoInfo])
 
   const validateUrl = (text: string) => {
-    const socialPatterns = [/instagram\.com/, /facebook\.com/, /twitter\.com/, /x\.com/, /fb\.watch/];
+    const socialPatterns = [/instagram\.com/, /facebook\.com/, /twitter\.com/, /x\.com/, /fb\.watch/, /tiktok\.com/, /vt\.tiktok\.com/];
     return socialPatterns.some(pattern => pattern.test(text.toLowerCase()));
   }
 
@@ -37,6 +48,7 @@ export default function Home() {
           setUrl(text);
           // Auto-clear error if they paste a new link
           setError("");
+          resetInputScroll();
         }
       } else {
         alert("Your browser does not support clipboard reading. Please paste manually.");
@@ -53,7 +65,7 @@ export default function Home() {
 
     // Pre-flight Validation
     if (!validateUrl(url)) {
-      setError("Please enter a valid Instagram, Facebook, or Twitter/X video link. Other platforms are not supported yet.")
+      setError("Please enter a valid Instagram, Facebook, Twitter/X, or TikTok video link. Other platforms are not supported yet.")
       setVideoInfo(null)
       return
     }
@@ -83,7 +95,7 @@ export default function Home() {
           Download Any <span className="gradient-text">Video</span> Instantly
         </h1>
         <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-          The fastest way to save high-quality videos from Instagram, Twitter, and Facebook. No watermarks, completely free.
+          The fastest way to save high-quality videos from Instagram, Twitter, Facebook, and TikTok. No watermarks, completely free.
         </p>
       </div>
 
@@ -93,21 +105,25 @@ export default function Home() {
           <div className="relative flex-1">
             <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
             <Input 
+              ref={inputRef}
               type="url"
               placeholder="Enter social media video link here..."
-              className="pl-10 h-14 text-lg bg-black/50 border-white/20 focus:border-primary/50 text-white rounded-xl"
+              className="pl-10 pr-24 h-14 text-lg bg-black/50 border-white/20 focus:border-primary/50 text-white rounded-xl"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
+              onPaste={resetInputScroll}
               required
             />
 
-            <AnimatePresence>
-              {!url && (
+            <AnimatePresence mode="wait">
+              {!url ? (
                 <motion.div
+                  key="paste-btn"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 z-20"
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-2 top-2 z-20"
                 >
                   <Button 
                     type="button"
@@ -120,6 +136,24 @@ export default function Home() {
                     <Clipboard className="h-4 w-4 mr-2" />
                     Paste
                   </Button>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="clear-btn"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-2 top-2 z-20"
+                >
+                  <button 
+                    type="button"
+                    onClick={() => { setUrl(""); setError(""); }}
+                    className="h-10 w-10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 focus:outline-none"
+                    title="Clear Input"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -161,6 +195,11 @@ export default function Home() {
       <div className="mt-16 flex items-center gap-6 justify-center flex-wrap">
         {[
           { name: 'Instagram', icon: Instagram, color: 'text-pink-500', bg: 'bg-pink-500/10' },
+          { name: 'TikTok', icon: ({ className }: any) => (
+            <svg className={className} viewBox="0 0 448 512" fill="currentColor">
+              <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z"/>
+            </svg>
+          ), color: 'text-white', bg: 'bg-white/10' },
           { name: 'Facebook', icon: Facebook, color: 'text-blue-600', bg: 'bg-blue-600/10' },
           { name: 'Twitter', icon: Twitter, color: 'text-sky-400', bg: 'bg-sky-400/10' }
         ].map((platform) => (

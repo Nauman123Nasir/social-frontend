@@ -13,8 +13,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [videoInfo, setVideoInfo] = useState<any>(null)
-  const [showPasteButton, setShowPasteButton] = useState(false)
-  const [clipboardText, setClipboardText] = useState("")
   const resultsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -31,41 +29,22 @@ export default function Home() {
     return socialPatterns.some(pattern => pattern.test(text.toLowerCase()));
   }
 
-  const checkClipboard = async () => {
+  const handlePaste = async () => {
     try {
-      if (!navigator.clipboard || !navigator.clipboard.readText) return;
-      
-      // We only want to check if the input is currently empty
-      if (url) {
-        setShowPasteButton(false);
-        return;
-      }
-
-      const text = await navigator.clipboard.readText();
-      if (text && validateUrl(text)) {
-        setClipboardText(text);
-        setShowPasteButton(true);
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+          setUrl(text);
+          // Auto-clear error if they paste a new link
+          setError("");
+        }
       } else {
-        setShowPasteButton(false);
+        alert("Your browser does not support clipboard reading. Please paste manually.");
       }
     } catch (err) {
-      // Clipboard access might be denied
-      setShowPasteButton(false);
+      console.error("Clipboard permission denied or failed", err);
+      alert("Please allow clipboard permissions or paste manually.");
     }
-  }
-
-  useEffect(() => {
-    // Check clipboard on focus and mount
-    const handleFocus = () => checkClipboard();
-    window.addEventListener('focus', handleFocus);
-    checkClipboard();
-
-    return () => window.removeEventListener('focus', handleFocus);
-  }, [url]);
-
-  const handlePaste = () => {
-    setUrl(clipboardText);
-    setShowPasteButton(false);
   }
 
   const handleExtract = async (e: React.FormEvent) => {
@@ -123,23 +102,23 @@ export default function Home() {
             />
 
             <AnimatePresence>
-              {showPasteButton && !url && (
+              {!url && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  className="absolute -top-12 right-0 z-20"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-20"
                 >
                   <Button 
                     type="button"
                     onClick={handlePaste}
                     variant="ghost"
                     size="sm"
-                    className="h-9 px-4 bg-primary/20 hover:bg-primary/30 text-primary border border-primary/40 rounded-full font-bold text-xs shadow-lg shadow-primary/20 backdrop-blur-md transition-all duration-300"
+                    className="h-10 px-4 bg-primary/20 hover:bg-primary/30 text-primary border border-primary/40 rounded-lg font-bold text-sm backdrop-blur-md transition-all duration-300"
                     suppressHydrationWarning
                   >
-                    <Clipboard className="h-3.5 w-3.5 mr-1.5" />
-                    Found Link: Paste?
+                    <Clipboard className="h-4 w-4 mr-2" />
+                    Paste
                   </Button>
                 </motion.div>
               )}

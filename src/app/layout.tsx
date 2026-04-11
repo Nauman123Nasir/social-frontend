@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     icon: "/fav-icon.jpeg",
     apple: "/fav-icon.jpeg",
   },
+  verification: {
+    google: "rhraJC_RqFc1szJJqz6cdoZxkICvgMu7N2EnlHp4NZ8",
+  },
 };
 
 

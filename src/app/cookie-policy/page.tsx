@@ -1,56 +1,95 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy - Social Video Downloader',
-  description: 'Detailed Cookie Policy regarding tracking and usage.',
+  title: 'Cookie Policy - Downifi | Tracking & Transparency',
+  description: 'Detailed Information about how Downifi uses cookies, including third-party advertising cookies from Google and how you can manage your preferences.',
 };
 
 export default function CookiePolicyPage() {
   return (
     <div className="container mx-auto px-4 py-20 max-w-4xl">
-      <h1 className="text-4xl font-bold mb-8 gradient-text">Cookie Policy</h1>
-      <p className="text-sm text-gray-500 mb-8">Last updated: {new Date().toLocaleDateString()}</p>
+      <div className="mb-12">
+        <h1 className="text-4xl md:text-5xl font-black mb-4 gradient-text">Cookie Policy</h1>
+        <p className="text-sm font-bold uppercase tracking-widest text-gray-500">Last updated: April 12, 2026</p>
+      </div>
       
-      <div className="prose prose-invert lg:prose-xl space-y-6 text-gray-300">
-        <p>
-          This Cookie Policy explains what cookies are and how we use them on Social Video Downloader. You should read this policy so you can understand what type of cookies we use, the information we collect using cookies, and how that information is used.
-        </p>
+      <div className="prose prose-invert max-w-none space-y-8 text-gray-300 leading-relaxed
+        [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-white [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:pb-2 [&_h2]:border-b [&_h2]:border-white/10
+        [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-white [&_h3]:mt-8 [&_h3]:mb-3
+        [&_p]:mb-4
+        [&_strong]:text-white [&_strong]:font-semibold
+        [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-4
+        [&_a]:text-primary [&_a]:underline
+      ">
+        <section>
+          <p>
+            This Cookie Policy explains what cookies are and how we use them on <strong>Downifi</strong> ("we," "us," or "our"). You should read this policy so you can understand what type of cookies we use, the information we collect using cookies, and how that information is used.
+          </p>
+          <p>
+            Cookies do not typically contain any information that personally identifies a user, but personal information that we store about you may be linked to the information stored in and obtained from cookies. For further information on how we use, store and keep your personal data secure, see our Privacy Policy.
+          </p>
+        </section>
 
-        <h2 className="text-2xl font-semibold text-white mt-12 mb-4">What Are Cookies?</h2>
-        <p>
-          Cookies are small pieces of text sent to your web browser by a website you visit. A cookie file is stored in your web browser and allows the Service or a third-party to recognize you and make your next visit easier and the Service more useful to you.
-        </p>
-        <p>
-          Cookies can be "persistent" or "session" cookies. Persistent cookies remain on your personal computer or mobile device when you go offline, while session cookies are deleted as soon as you close your web browser.
-        </p>
+        <section>
+          <h2>1. What Are Cookies?</h2>
+          <p>
+            Cookies are small text files that are used to store small pieces of information. They are stored on your device when the website is loaded on your browser. These cookies help us make the website function properly, make it more secure, provide better user experience, and understand how the website performs and to analyze what works and where it needs improvement.
+          </p>
+        </section>
 
-        <h2 className="text-2xl font-semibold text-white mt-12 mb-4">How Do We Use Cookies?</h2>
-        <p>
-          When you use and access the Service, we may place a number of cookies files in your web browser.
-          We use cookies for the following purposes:
-        </p>
-        <ul className="list-disc pl-6 space-y-2 mt-4 text-gray-300">
-          <li><strong>Essential Cookies:</strong> We may use essential cookies to authenticate users and prevent fraudulent use of user accounts. For this website, this mainly pertains to remembering your cookie consent choice.</li>
-          <li><strong>Advertising Cookies:</strong> We partner with third-party tracking and advertising networks (like Google AdSense). These networks use cookies to track your browsing habits, enabling them to show targeted ads which are more relevant to you and your interests.</li>
-          <li><strong>Google DoubleClick DART Cookie:</strong> Google, as a third-party vendor, uses cookies to serve ads on our Service. Google's use of the DART cookie enables it and its partners to serve ads to our users based on their visit to our Service or other websites on the Internet. </li>
-        </ul>
+        <section>
+          <h2>2. How We Use Cookies</h2>
+          <p>
+            Like most online services, our website uses first-party and third-party cookies for several purposes. First-party cookies are mostly necessary for the website to function the right way, and they do not collect any of your personally identifiable data.
+          </p>
+          <p>
+            Third-party cookies used on our website are mainly for understanding how the website performs, how you interact with our website, keeping our services secure, providing advertisements that are relevant to you, and all in all providing you with a better and improved user experience and help speed up your future interactions with our website.
+          </p>
+        </section>
 
-        <h2 className="text-2xl font-semibold text-white mt-12 mb-4">What Are Your Choices Regarding Cookies?</h2>
-        <p>
-          If you'd like to delete cookies or instruct your web browser to delete or refuse cookies, please visit the help pages of your web browser.
-        </p>
-        <p>
-          Please note, however, that if you delete cookies or refuse to accept them, you might not be able to use all of the features we offer, you may not be able to store your preferences, and some of our pages might not display properly.
-        </p>
+        <section>
+          <h2>3. Types of Cookies We Use</h2>
+          <ul>
+            <li>
+              <strong>Essential Cookies:</strong> Some cookies are essential for you to be able to experience the full functionality of our site. They allow us to maintain user sessions and prevent any security threats. They do not collect or store any personal information.
+            </li>
+            <li>
+              <strong>Statistics Cookies:</strong> These cookies store information like the number of visitors to the website, the number of unique visitors, which pages of the website have been visited, the source of the visit, etc. These data help us understand and analyze how well the website performs and where it needs improvement.
+            </li>
+            <li>
+              <strong>Marketing/Advertising Cookies:</strong> Our website displays advertisements. These cookies are used to personalize the advertisements that we show to you so that they are meaningful to you. These cookies also help us keep track of the efficiency of these ad campaigns. The information stored in these cookies may also be used by the third-party ad providers to show you ads on other websites on the browser as well.
+            </li>
+          </ul>
+        </section>
 
-        <ul className="list-disc pl-6 space-y-2 mt-4 text-gray-300">
-          <li>For the Chrome web browser, please visit this page from Google: <a href="https://support.google.com/accounts/answer/32050" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">Google Chrome Help</a></li>
-          <li>For the Safari web browser, please visit this page from Apple: <a href="https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">Apple Safari Help</a></li>
-        </ul>
-        
-        <p className="mt-4">
-          You may also opt out of the use of the DART cookie by visiting the Google ad and content network Privacy Policy at: <a href="http://www.google.com/privacy_ads.html" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">Google Ad Privacy</a>
-        </p>
+        <section>
+          <h2>4. Google AdSense & DoubleClick Cookies</h2>
+          <p>
+            Google, as a third-party vendor, uses cookies to serve ads on <strong>Downifi</strong>. Google's use of the DART cookie enables it and its partners to serve ads to our users based on their visit to our Site or other websites on the Internet.
+          </p>
+          <p>
+            You may learn more about how Google uses cookies in advertising and how you can control them by visiting the <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google Advertising Privacy & Terms</a> page.
+          </p>
+        </section>
+
+        <section>
+          <h2>5. How Can You Control Cookies?</h2>
+          <p>
+            You can manage your cookies preferences through our site's cookie consent banner. Additionally, different browsers provide different methods to block and delete cookies used by websites. You can change the settings of your browser to block/delete the cookies.
+          </p>
+          <ul>
+            <li><strong>Google Chrome:</strong> Settings -> Privacy and Security -> Cookies and other site data.</li>
+            <li><strong>Mozilla Firefox:</strong> Settings -> Privacy & Security -> Cookies and Site Data.</li>
+            <li><strong>Apple Safari:</strong> Preferences -> Privacy -> Manage Website Data.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>6. Changes to This Cookie Policy</h2>
+          <p>
+            We may update our Cookie Policy from time to time. We will notify you of any changes by posting the new Cookie Policy on this page. You are advised to review this Cookie Policy periodically for any changes.
+          </p>
+        </section>
       </div>
     </div>
   );

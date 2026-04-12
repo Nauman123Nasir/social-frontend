@@ -2,6 +2,10 @@ import type { NextConfig } from "next";
 
 const securityHeaders = [
   {
+    key: 'Content-Security-Policy',
+    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://adservice.google.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://pagead2.googlesyndication.com https://*.google.com https://*.gstatic.com https://*.instagram.com https://*.tiktok.com https://*.fbcdn.net https://*.twimg.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://pagead2.googlesyndication.com https://*.google-analytics.com https://*.analytics.google.com https://*.googlesyndication.com; frame-src 'self' https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com; object-src 'none'; upgrade-insecure-requests;"
+  },
+  {
     key: 'X-DNS-Prefetch-Control',
     value: 'on'
   },

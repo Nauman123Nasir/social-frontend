@@ -91,7 +91,7 @@ export default function PrivacyPolicyPage() {
           You can choose to disable cookies through your individual browser options. To know more detailed information about cookie management with specific web browsers, it can be found at the browsers' respective websites.
         </p>
 
-        <h2>8. GDPR Data Protection Rights</h2>
+        <h2 id="gdpr">8. GDPR Data Protection Rights</h2>
         <p>We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:</p>
         <ul>
           <li><strong>The right to access</strong> – You have the right to request copies of your personal data.</li>
@@ -102,7 +102,7 @@ export default function PrivacyPolicyPage() {
           <li><strong>The right to data portability</strong> – You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</li>
         </ul>
 
-        <h2>9. CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
+        <h2 id="ccpa">9. CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
         <p>Under the CCPA, among other rights, California consumers have the right to:</p>
         <ul>
           <li>Request that a business that collects a consumer's personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.</li>
@@ -110,7 +110,16 @@ export default function PrivacyPolicyPage() {
           <li>Request that a business that sells a consumer's personal data, not sell the consumer's personal data.</li>
         </ul>
 
-        <h2>10. Children's Information</h2>
+        <h2>10. Data Protection Officer (DPO)</h2>
+        <p>
+          We have appointed a Data Protection Officer (DPO) who is responsible for overseeing questions in relation to this privacy policy. If you have any questions about this privacy policy, including any requests to exercise your legal rights, please contact the DPO using the details set out below:
+        </p>
+        <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+          <p className="font-bold text-white mb-2">Attn: Data Protection Officer</p>
+          <p>Email: <a href="mailto:dpo@downifi.com">dpo@downifi.com</a></p>
+        </div>
+
+        <h2>11. Children's Information</h2>
         <p>
           Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.
         </p>

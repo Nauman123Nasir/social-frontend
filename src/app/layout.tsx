@@ -119,6 +119,7 @@ export default function RootLayout({
                                 <a href="/disclaimer" className="hover:text-gray-400 transition">Legal Disclaimer</a>
                                 <a href="/dmca" className="hover:text-gray-400 transition">DMCA Compliance</a>
                                 <a href="/cookie-policy" className="hover:text-gray-400 transition">Cookie Settings</a>
+                                <a href="/privacy#ccpa" className="hover:text-gray-400 transition">Do Not Sell My Personal Information</a>
                             </div>
                         </div>
 

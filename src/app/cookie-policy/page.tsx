@@ -78,9 +78,9 @@ export default function CookiePolicyPage() {
             You can manage your cookies preferences through our site's cookie consent banner. Additionally, different browsers provide different methods to block and delete cookies used by websites. You can change the settings of your browser to block/delete the cookies.
           </p>
           <ul>
-            <li><strong>Google Chrome:</strong> Settings -> Privacy and Security -> Cookies and other site data.</li>
-            <li><strong>Mozilla Firefox:</strong> Settings -> Privacy & Security -> Cookies and Site Data.</li>
-            <li><strong>Apple Safari:</strong> Preferences -> Privacy -> Manage Website Data.</li>
+            <li><strong>Google Chrome:</strong> Settings &rarr; Privacy and Security &rarr; Cookies and other site data.</li>
+            <li><strong>Mozilla Firefox:</strong> Settings &rarr; Privacy &amp; Security &rarr; Cookies and Site Data.</li>
+            <li><strong>Apple Safari:</strong> Preferences &rarr; Privacy &rarr; Manage Website Data.</li>
           </ul>
         </section>
 

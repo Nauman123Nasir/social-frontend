@@ -71,9 +71,8 @@ export default function DMCAPage() {
             Completed notices or counter-notifications should be sent to our Designated Copyright Agent at:
           </p>
           <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-            <p className="font-bold text-white mb-2">Downifi Legal Dept.</p>
-            <p>Email: <a href="mailto:dmca@downifi.com">dmca@downifi.com</a></p>
-            <p>Address: 123 Digital Way, Ste 404 (Attention: Copyright Agent)</p>
+            <p className="font-bold text-white mb-2">Downifi Legal Dept. (DMCA)</p>
+            <p>Email: <a href="mailto:contact@downifi.com">contact@downifi.com</a></p>
           </div>
         </section>
 

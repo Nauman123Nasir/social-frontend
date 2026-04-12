@@ -68,7 +68,7 @@ export default function DisclaimerPage() {
         <section>
           <h2>6. Contact Us</h2>
           <p>
-            Should you have any feedback, comments, requests for technical support or other inquiries, please contact us by email: <a href="mailto:support@downifi.com">support@downifi.com</a>.
+            Should you have any feedback, comments, requests for technical support or other inquiries, please contact us by email: <a href="mailto:contact@downifi.com">contact@downifi.com</a>.
           </p>
         </section>
       </div>

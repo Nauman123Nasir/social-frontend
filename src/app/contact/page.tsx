@@ -23,40 +23,17 @@ export default function ContactPage() {
       </div>
 
       <div className="grid lg:grid-cols-3 gap-12">
-        {/* Contact Info Cards */}
-        <div className="lg:col-span-1 space-y-6">
+        {/* Contact Info Card */}
+        <div className="lg:col-span-1">
           <div className="glass-effect p-8 rounded-3xl border border-white/5 hover:border-primary/20 transition-all group">
             <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
-              <MapPin className="h-6 w-6" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Business Office</h3>
-            <p className="text-gray-400 leading-relaxed">
-              123 Tech Plaza, Suite 404<br />
-              San Francisco, CA 94103<br />
-              United States
-            </p>
-          </div>
-
-          <div className="glass-effect p-8 rounded-3xl border border-white/5 hover:border-primary/20 transition-all group">
-            <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
-              <Phone className="h-6 w-6" />
+              <Mail className="h-6 w-6" />
             </div>
             <h3 className="text-xl font-bold text-white mb-2">Direct Support</h3>
             <p className="text-gray-400 leading-relaxed font-medium">
-              +1 (555) 012-3456
+              contact@downifi.com
             </p>
-            <p className="text-xs text-gray-500 mt-2 italic font-medium">Available during business hours</p>
-          </div>
-
-          <div className="glass-effect p-8 rounded-3xl border border-white/5 hover:border-primary/20 transition-all group">
-            <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
-              <Clock className="h-6 w-6" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Operating Hours</h3>
-            <p className="text-gray-400 leading-relaxed">
-              Monday — Friday<br />
-              09:00 AM — 06:00 PM EST
-            </p>
+            <p className="text-xs text-gray-500 mt-2 italic font-medium">24/7 Digital Assistance</p>
           </div>
         </div>
 
@@ -160,13 +137,13 @@ export default function ContactPage() {
           </h2>
           <div className="space-y-3">
             <p className="text-gray-400">
-              General Support: <a href="mailto:support@downifi.com" className="text-white hover:text-primary transition font-medium">support@downifi.com</a>
+              General Support: <a href="mailto:contact@downifi.com" className="text-white hover:text-primary transition font-medium">contact@downifi.com</a>
             </p>
             <p className="text-gray-400">
-              Media Inquiries: <a href="mailto:press@downifi.com" className="text-white hover:text-primary transition font-medium">press@downifi.com</a>
+              Media Inquiries: <a href="mailto:contact@downifi.com" className="text-white hover:text-primary transition font-medium">contact@downifi.com</a>
             </p>
             <p className="text-gray-400">
-              Legal / DPO: <a href="mailto:dpo@downifi.com" className="text-white hover:text-primary transition font-medium">dpo@downifi.com</a>
+              Legal / DPO: <a href="mailto:contact@downifi.com" className="text-white hover:text-primary transition font-medium">contact@downifi.com</a>
             </p>
           </div>
         </div>

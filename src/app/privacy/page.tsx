@@ -115,8 +115,8 @@ export default function PrivacyPolicyPage() {
           We have appointed a Data Protection Officer (DPO) who is responsible for overseeing questions in relation to this privacy policy. If you have any questions about this privacy policy, including any requests to exercise your legal rights, please contact the DPO using the details set out below:
         </p>
         <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-          <p className="font-bold text-white mb-2">Attn: Data Protection Officer</p>
-          <p>Email: <a href="mailto:dpo@downifi.com">dpo@downifi.com</a></p>
+          <p className="font-bold text-white mb-2">Attn: Data Support Team</p>
+          <p>Email: <a href="mailto:contact@downifi.com">contact@downifi.com</a></p>
         </div>
 
         <h2>11. Children's Information</h2>

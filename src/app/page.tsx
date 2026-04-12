@@ -228,19 +228,32 @@ export default function Home() {
       {videoInfo && (
         <div ref={resultsRef} className="mt-16 w-full max-w-4xl grid md:grid-cols-2 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Thumbnail */}
-            <div className="rounded-2xl overflow-hidden glass-effect border-white/10 relative aspect-video group">
+            <div className="rounded-2xl overflow-hidden glass-effect border-white/10 relative aspect-video group bg-black/50">
                 {videoInfo.thumbnail ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img 
                         src={videoInfo.thumbnail} 
                         alt={videoInfo.title}
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          target.style.display = 'none';
+                          const fallback = target.nextElementSibling as HTMLElement;
+                          if (fallback) fallback.style.display = 'flex';
+                        }}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                ) : (
-                    <div className="w-full h-full bg-gray-800 flex items-center justify-center">
-                        <PlayCircle className="h-16 w-16 text-gray-600" />
-                    </div>
-                )}
+                ) : null}
+                
+                <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-gray-900 to-black select-none pointer-events-none">
+                    <PlayCircle className="h-16 w-16 text-primary/40 mb-3 group-hover:text-primary transition-colors" />
+                    <span className="text-xs font-bold text-gray-500 uppercase tracking-widest leading-tight">
+                      Video Preview Unavailable
+                      <br />
+                      <span className="text-[10px] lowercase opacity-50">Private profile or hotlink protection active</span>
+                    </span>
+                </div>
+
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                    <PlayCircle className="h-16 w-16 text-white opacity-80" />
                 </div>

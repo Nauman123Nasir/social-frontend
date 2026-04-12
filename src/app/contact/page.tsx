@@ -4,11 +4,33 @@ import { useState } from 'react';
 import { Mail, MapPin, Clock, Phone, Send, MessageSquare } from 'lucide-react';
 
 export default function ContactPage() {
-  const [status, setStatus] = useState<'' | 'success'>('');
+  const [status, setStatus] = useState<'' | 'success' | 'error' | 'loading'>('');
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus('success');
+    setStatus('loading');
+
+    const formData = new FormData(e.currentTarget);
+    formData.append('access_key', '9d11387d-f3c2-4ffd-818d-0f1ffde5cdb8');
+    formData.append('from_name', 'Downifi Contact Form');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus('success');
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus('error');
+    }
   };
 
   return (
@@ -62,6 +84,12 @@ export default function ContactPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+                {status === 'error' && (
+                  <div className="p-4 bg-red-500/10 border border-red-500/50 rounded-xl text-red-400 text-sm">
+                    Something went wrong. Please try emailing us directly at contact@downifi.com
+                  </div>
+                )}
+
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-3">
                     <label htmlFor="name" className="text-sm font-bold uppercase tracking-widest text-gray-400 ml-1">
@@ -70,6 +98,7 @@ export default function ContactPage() {
                     <input
                       type="text"
                       id="name"
+                      name="name"
                       required
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-300"
                       placeholder="Enter your name"
@@ -82,6 +111,7 @@ export default function ContactPage() {
                     <input
                       type="email"
                       id="email"
+                      name="email"
                       required
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-300"
                       placeholder="name@company.com"
@@ -95,6 +125,7 @@ export default function ContactPage() {
                   </label>
                   <select
                     id="subject"
+                    name="subject"
                     className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-300 appearance-none cursor-pointer"
                   >
                     <option className="bg-gray-900 border-none">Technical Support</option>
@@ -110,6 +141,7 @@ export default function ContactPage() {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     required
                     rows={6}
                     className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-300 resize-none"
@@ -119,10 +151,11 @@ export default function ContactPage() {
                 
                 <button
                   type="submit"
-                  className="w-full bg-primary hover:primary-hover text-white font-black text-lg py-5 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center group shadow-lg shadow-primary/20"
+                  disabled={status === 'loading'}
+                  className="w-full bg-primary hover:primary-hover text-white font-black text-lg py-5 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center group shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <span className="mr-3">Transmit Message</span>
-                  <Send className="h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <span className="mr-3">{status === 'loading' ? 'Transmitting...' : 'Transmit Message'}</span>
+                  <Send className={`h-5 w-5 ${status === 'loading' ? 'animate-pulse' : 'group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform'}`} />
                 </button>
               </form>
             )}

@@ -5,10 +5,12 @@ import { Mail, MapPin, Clock, Phone, Send, MessageSquare } from 'lucide-react';
 
 export default function ContactPage() {
   const [status, setStatus] = useState<'' | 'success' | 'error' | 'loading'>('');
+  const [errorMessage, setErrorMessage] = useState('');
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('loading');
+    setErrorMessage('');
 
     const formData = new FormData(e.currentTarget);
     formData.append('access_key', '9d11387d-f3c2-4ffd-818d-0f1ffde5cdb8');
@@ -26,10 +28,12 @@ export default function ContactPage() {
         setStatus('success');
       } else {
         setStatus('error');
+        setErrorMessage(data.message || 'Unknown error occurred.');
       }
     } catch (error) {
       console.error('Submission error:', error);
       setStatus('error');
+      setErrorMessage('Network error. Please check your connection.');
     }
   };
 
@@ -86,7 +90,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
                 {status === 'error' && (
                   <div className="p-4 bg-red-500/10 border border-red-500/50 rounded-xl text-red-400 text-sm">
-                    Something went wrong. Please try emailing us directly at contact@downifi.com
+                    {errorMessage || 'Something went wrong. Please try emailing us directly at contact@downifi.com'}
                   </div>
                 )}
 

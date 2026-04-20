@@ -108,7 +108,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="mb-4 hidden sm:flex justify-center w-full"
+              className="mb-4 flex justify-center w-full"
             >
               <Button 
                 type="button"

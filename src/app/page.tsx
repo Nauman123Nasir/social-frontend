@@ -13,6 +13,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [videoInfo, setVideoInfo] = useState<any>(null)
+  const [isIOS, setIsIOS] = useState(false)
   const resultsRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -24,6 +25,14 @@ export default function Home() {
       }
     }, 10);
   }
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const ua = window.navigator.userAgent;
+      const iOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      setIsIOS(iOS);
+    }
+  }, []);
 
   useEffect(() => {
     if (videoInfo && resultsRef.current) {
@@ -103,7 +112,7 @@ export default function Home() {
         
         {/* External Paste Button (Moved Above) */}
         <AnimatePresence>
-          {!url && (
+          {!url && !isIOS && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}

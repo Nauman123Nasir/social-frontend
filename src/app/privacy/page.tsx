@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Privacy Policy - Downifi | Your Data & Privacy Matters',
   description: 'Our comprehensive privacy policy detailing how we protect your data, our use of cookies, and compliance with GDPR, CCPA, and Google AdSense requirements.',
+  robots: { index: false, follow: true },
 };
 
 export default function PrivacyPolicyPage() {

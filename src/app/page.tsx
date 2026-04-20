@@ -6,6 +6,35 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import axios from "axios"
 import { motion, AnimatePresence } from "framer-motion"
+import FAQSchema from "@/components/FAQSchema"
+import HowToSchema from "@/components/HowToSchema"
+
+const HOW_TO_STEPS = [
+  {
+    name: "Copy the video link",
+    text: "Open the TikTok, Instagram Reel, Facebook, or X post and tap Share, then Copy Link to grab the URL.",
+  },
+  {
+    name: "Paste the URL into Downifi",
+    text: "Drop the copied link into the search box at the top of the Downifi home page. The platform is auto-detected.",
+  },
+  {
+    name: "Download the MP4",
+    text: "Hit Download to save the video as an MP4 file in up to 1080p quality — completely free and watermark-free.",
+  },
+]
+
+const FAQ_ITEMS = [
+  { question: "Is Downifi free to use?", answer: "Yes, Downifi is 100% free. There are no daily download caps, no hidden fees, and no registration required. Save as many TikTok, Instagram, Facebook, and X videos as you want." },
+  { question: "How do I download a TikTok video without a watermark?", answer: "Open TikTok, tap Share on the video, then Copy Link. Paste the link into the box on Downifi's home page and hit Download. Downifi automatically returns the clean, watermark-free MP4 version." },
+  { question: "Can I save Instagram Reels to my iPhone or Android?", answer: "Yes. Downifi works in Safari on iPhone and Chrome on Android with no app install. Copy the Reel link from Instagram, paste it on Downifi, and the MP4 saves straight to your Photos or Downloads folder." },
+  { question: "Does Downifi store my videos or downloaded links?", answer: "No. Downifi does not host, cache, or log any videos. It acts as a lightweight bridge between the social platform's CDN and your browser. Nothing is saved on our servers after the download completes." },
+  { question: "Which platforms does Downifi support?", answer: "Downifi supports high-speed downloads for TikTok (no watermark), Instagram (Reels, feed videos, IGTV), Facebook (HD videos and Reels), and Twitter / X (videos and GIFs)." },
+  { question: "Do I need to install an app or create an account?", answer: "Neither. Downifi runs entirely in your browser with no app install, no signup, and no social login. Just paste a public video URL and download." },
+  { question: "What is the maximum video quality I can download?", answer: "Downifi always fetches the highest resolution the source platform makes available — typically 1080p Full HD for TikTok and Instagram, and up to 4K for Facebook videos when the uploader provides that quality." },
+  { question: "Why isn't my video link working?", answer: "Common causes include the post being private, the account being restricted, the link pointing to a photo instead of a video, or an incomplete URL. Ensure the video is public and the link starts with https://." },
+  { question: "Is it legal to download social media videos?", answer: "Downloading publicly available videos for personal, offline viewing is generally permitted under fair use. Do not redistribute, monetize, or re-upload copyrighted content without the creator's written permission." },
+]
 
 export default function Home() {
   const [url, setUrl] = useState("")
@@ -96,14 +125,23 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-4 py-20 flex flex-col items-center">
-      
+      <FAQSchema items={FAQ_ITEMS} />
+      <HowToSchema
+        name="How to Download Videos from TikTok, Instagram, Facebook, and X"
+        description="Free, 3-step guide for saving HD social media videos to your device using Downifi — no app and no signup required."
+        steps={HOW_TO_STEPS}
+      />
+
       {/* Hero Content */}
       <div className="text-center max-w-3xl mb-12 animate-fade-in-up">
         <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
-          Download Any <span className="gradient-text">Video</span> Instantly
+          Free Social <span className="gradient-text">Video Downloader</span>
         </h1>
-        <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-          The fastest way to save high-quality videos from Instagram, Twitter, Facebook, and TikTok. No watermarks, completely free.
+        <p className="text-xl text-gray-400 mb-4 max-w-2xl mx-auto">
+          Download HD videos from <strong className="text-white">TikTok, Instagram, Facebook, and X (Twitter)</strong> in one click — no watermark, no app, no signup.
+        </p>
+        <p className="text-sm text-gray-500 max-w-2xl mx-auto">
+          Paste any public video link below to save Reels, Shorts, Stories, and posts in MP4 at full 1080p quality. Works on iPhone, Android, PC, and Mac.
         </p>
       </div>
 
@@ -330,8 +368,8 @@ export default function Home() {
                                 </div>
                                 
                                 <Button size="lg" asChild className="w-full rounded-xl font-bold px-6 py-4 h-auto shadow-lg shadow-primary/10 hover:scale-[1.01] active:scale-95 transition-all bg-primary hover:bg-primary/90 text-black" suppressHydrationWarning>
-                                    <a 
-                                        href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(videoInfo.formats[0].url)}&title=${encodeURIComponent((videoInfo.title || 'video').replace(/\s+/g, '_'))}&ext=${encodeURIComponent(videoInfo.formats[0].ext || 'mp4')}&needs_merging=${videoInfo.formats[0].needs_merging || false}&original_url=${encodeURIComponent(extractedUrl)}`} 
+                                    <a
+                                        href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(videoInfo.formats[0].url)}&title=${encodeURIComponent((videoInfo.title || 'video').replace(/\s+/g, '_'))}&ext=${encodeURIComponent(videoInfo.formats[0].ext || 'mp4')}&needs_merging=${videoInfo.formats[0].needs_merging || false}&original_url=${encodeURIComponent(extractedUrl)}`}
                                         download
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -360,18 +398,19 @@ export default function Home() {
             </div>
       )}
 
-      {/* Feature Section / Placeholder for Ads */}
+      {/* How It Works - numbered for Google rich-snippet eligibility */}
       <div className="mt-32 w-full max-w-5xl">
           <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4">How it works</h2>
+              <h2 className="text-3xl font-bold mb-4">How to Download Videos in 3 Steps</h2>
               <div className="w-24 h-1 bg-gradient-to-r from-primary to-purple-500 mx-auto rounded-full"></div>
+              <p className="text-gray-400 mt-6 max-w-2xl mx-auto">Save any public video from TikTok, Instagram, Facebook, or X to your device in seconds — no login, no software install.</p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
               {[
-                  { title: "1. Copy Link", desc: "Find the video you want to download and copy its share URL." },
-                  { title: "2. Paste URL", desc: "Paste the copied link into the input box at the top of this page." },
-                  { title: "3. Download", desc: "Click download and save the high-quality video directly to your device." }
+                  { title: "1. Copy the Video Link", desc: "Open the TikTok, Instagram Reel, Facebook, or X post and tap Share → Copy Link to grab the URL." },
+                  { title: "2. Paste URL Above", desc: "Drop the copied link into the search box at the top of this page. Downifi auto-detects the platform." },
+                  { title: "3. Download in HD", desc: "Hit Download to save the video as an MP4 file in up to 1080p — completely free and watermark-free." }
               ].map((step, i) => (
                   <div key={i} className="p-8 rounded-2xl glass-effect border-white/5 hover:-translate-y-2 transition-transform duration-300">
                       <h3 className="text-xl font-bold mb-3 gradient-text">{step.title}</h3>
@@ -381,39 +420,89 @@ export default function Home() {
           </div>
       </div>
 
+      {/* Platform-Specific Section - targets [platform] downloader long-tail keywords */}
+      <div className="mt-32 w-full max-w-5xl">
+          <div className="text-center mb-16 px-4">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">Supported Platforms</h2>
+              <div className="w-32 h-1.5 bg-gradient-to-r from-primary to-purple-500 mx-auto rounded-full mb-10"></div>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                One tool, every major social network. Downifi works as a dedicated <strong className="text-white">TikTok video downloader</strong>, <strong className="text-white">Instagram Reels saver</strong>, <strong className="text-white">Facebook video grabber</strong>, and <strong className="text-white">Twitter/X downloader</strong> — all in a single page.
+              </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+              <div className="p-8 rounded-2xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-3">TikTok Downloader — No Watermark</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    Save TikTok videos without the logo or username overlay. Downifi fetches the clean, watermark-free MP4 file so your saved clips look exactly like the original upload. Supports <strong className="text-white">TikTok Shorts</strong>, <strong className="text-white">story clips</strong>, and long-form TikTok videos on both iPhone and Android.
+                  </p>
+              </div>
+              <div className="p-8 rounded-2xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-3">Instagram Reels & Video Downloader</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    Grab Instagram Reels, feed videos, and IGTV clips in full HD. Just copy the Instagram share link and paste it above — Downifi works as a free <strong className="text-white">Instagram Reels downloader online</strong>, no Instagram login required. Ideal for saving inspiration or re-sharing content you own.
+                  </p>
+              </div>
+              <div className="p-8 rounded-2xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-3">Facebook Video Downloader (HD)</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    Download public Facebook videos, Reels, and watch clips in high definition. Downifi bypasses the in-app viewer and gives you a direct MP4 link — perfect for saving tutorials, news clips, and memorable moments to your camera roll or PC.
+                  </p>
+              </div>
+              <div className="p-8 rounded-2xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-3">Twitter (X) Video Downloader</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    Save videos and GIFs from X (formerly Twitter) in original quality. Paste any tweet URL to pull the highest-bitrate MP4 available. Works as a free <strong className="text-white">Twitter video downloader online</strong> for viral clips, sports highlights, and news footage.
+                  </p>
+              </div>
+          </div>
+      </div>
+
       {/* Detailed Features Section for SEO & Readability */}
       <div className="mt-32 w-full max-w-5xl">
           <div className="text-center mb-16 px-4">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">World Class Social Video Downloader</h2>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">Why Downifi Is the Best Free Video Downloader</h2>
               <div className="w-32 h-1.5 bg-gradient-to-r from-primary to-purple-500 mx-auto rounded-full mb-10"></div>
               <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                Downifi is the web's most reliable tool for saving high-resolution videos from TikTok, Instagram, Twitter (X), and Facebook. Our platform is engineered for speed, privacy, and maximum video quality.
+                Downifi is the web's fastest tool for saving high-resolution videos from TikTok, Instagram, Twitter (X), and Facebook. Built for speed, privacy, and maximum video quality — with zero ads on download pages.
               </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-white">High Definition Quality</h3>
+                  <h3 className="text-2xl font-bold text-white">Full HD &amp; 4K Quality Preserved</h3>
                   <p className="text-gray-400 leading-relaxed">
-                    We ensure that every video you download retains its original quality. Whether it's 1080p, 4K, or standard definition, our algorithm extracts the highest available resolution from the source platforms like Instagram, Twitter, and Facebook. Say goodbye to pixelated downloads and experience crystal-clear offline viewing.
+                    Every video you download keeps its original resolution. Whether the source is 720p, 1080p, or 4K, our extractor pulls the highest-quality MP4 stream directly from Instagram, TikTok, X, and Facebook CDNs. No recompression, no quality loss — just pixel-perfect offline playback.
                   </p>
               </div>
               <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-white">Fast, Free, and Unlimited</h3>
+                  <h3 className="text-2xl font-bold text-white">Unlimited Free Downloads — No Signup</h3>
                   <p className="text-gray-400 leading-relaxed">
-                    Unlike other web utility tools, we don't put a cap on your downloads. Enjoy unlimited high-speed fetching without ever needing to pull out a credit card or register an account. Our servers are optimized to fetch video metadata and download links in mere seconds, ensuring a seamless user experience every time.
+                    Download as many videos as you want, as often as you want. No daily caps, no premium tier, no credit card, no account creation. Our servers resolve video metadata in under two seconds, so you can batch-save dozens of clips back-to-back without friction.
                   </p>
               </div>
               <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-white">No Watermarks (TikTok & Reels)</h3>
+                  <h3 className="text-2xl font-bold text-white">Watermark-Free TikTok &amp; Reels</h3>
                   <p className="text-gray-400 leading-relaxed">
-                    We understand how annoying platform watermarks can be when trying to save a memory. Downifi specializes in retrieving the raw, watermark-free version of TikTok videos and Instagram Reels whenever possible, providing you with pristine MP4 files for your personal archive.
+                    Save TikTok videos and Instagram Reels without the visible TikTok logo, @username stamp, or Instagram watermark. Downifi requests the raw source file whenever the platform exposes it, so your archive stays clean and reusable.
                   </p>
               </div>
                <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-white">Cross-Platform Compatibility</h3>
+                  <h3 className="text-2xl font-bold text-white">Works on iPhone, Android, PC &amp; Mac</h3>
                   <p className="text-gray-400 leading-relaxed">
-                    This is a web-based utility, which means it works effortlessly on any device. Whether you are using an iPhone, an Android smartphone, a Windows PC, or a Mac, all you need is a web browser. There is no software to install, mitigating the risk of malware and saving your device's storage space.
+                    Downifi is a browser-based video downloader — nothing to install, nothing to update. Save Instagram Reels on iPhone via Safari, download TikTok videos on Android in Chrome, or archive Facebook clips from your desktop. Lower malware risk, zero storage footprint.
+                  </p>
+              </div>
+              <div className="space-y-4">
+                  <h3 className="text-2xl font-bold text-white">100% Private — No Data Stored</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    We don't log the links you paste, we don't cache the videos you download, and we never ask for your social media credentials. Your download history stays on your device. Videos stream directly from the original platform's CDN to your browser.
+                  </p>
+              </div>
+              <div className="space-y-4">
+                  <h3 className="text-2xl font-bold text-white">MP4 Output — Universally Compatible</h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    Every saved file is a standard MP4 with H.264 video and AAC audio, so it plays natively in iOS Photos, Android Gallery, VLC, QuickTime, and any video editor. No codec juggling, no format conversion needed before sharing or editing.
                   </p>
               </div>
           </div>
@@ -429,22 +518,47 @@ export default function Home() {
           <div className="space-y-6">
               <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
                   <h3 className="text-xl font-bold text-white mb-3">Is Downifi free to use?</h3>
-                  <p className="text-gray-400">Yes, our tool is 100% free with no registration required. Download as many videos as you want from TikTok, Instagram, and more without hidden fees.</p>
-              </div>
-              
-              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
-                  <h3 className="text-xl font-bold text-white mb-3">Does Downifi save a copy of my videos?</h3>
-                  <p className="text-gray-400">Absolutely not. We prioritize your privacy. Downifi does not host or store any videos. It simply processes your request and provides a direct link from the platform servers to your device storage.</p>
-              </div>
-              
-              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
-                  <h3 className="text-xl font-bold text-white mb-3">Which platforms are supported for downloads?</h3>
-                  <p className="text-gray-400">We currently support high-speed downloads for <strong>TikTok</strong> (No Watermark), <strong>Instagram</strong> (Reels & Video), <strong>Twitter (X)</strong>, and <strong>Facebook</strong>. More platforms are added regularly.</p>
+                  <p className="text-gray-400">Yes, Downifi is 100% free. There are no daily download caps, no hidden fees, and no registration required. Save as many TikTok, Instagram, Facebook, and X videos as you want.</p>
               </div>
 
-               <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3">How do I download a TikTok video without a watermark?</h3>
+                  <p className="text-gray-400">Open the TikTok app or website, tap <strong>Share</strong> on the video, then <strong>Copy Link</strong>. Paste the link into the box at the top of this page and hit Download — Downifi automatically returns the clean, watermark-free MP4 version.</p>
+              </div>
+
+              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3">Can I save Instagram Reels to my iPhone or Android?</h3>
+                  <p className="text-gray-400">Yes. Downifi works in Safari on iPhone and Chrome on Android with no app install. Copy the Reel link from Instagram (tap the paper-plane icon → Copy Link), paste it here, and the MP4 will save straight to your Photos or Downloads folder.</p>
+              </div>
+
+              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3">Does Downifi store my videos or downloaded links?</h3>
+                  <p className="text-gray-400">No. Downifi does not host, cache, or log any videos. We act as a lightweight bridge between the social platform's CDN and your browser. Nothing is saved on our servers after the download completes.</p>
+              </div>
+
+              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3">Which platforms does Downifi support?</h3>
+                  <p className="text-gray-400">We currently support high-speed downloads for <strong>TikTok</strong> (no watermark), <strong>Instagram</strong> (Reels, feed videos, IGTV), <strong>Facebook</strong> (HD videos and Reels), and <strong>Twitter / X</strong> (videos and GIFs). More platforms such as YouTube Shorts and LinkedIn videos are on the roadmap.</p>
+              </div>
+
+              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3">Do I need to install an app or create an account?</h3>
+                  <p className="text-gray-400">Neither. Downifi runs entirely in your browser — no app install, no signup, no social login. Just paste a public video URL and download. No APK files or Chrome extensions required.</p>
+              </div>
+
+              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3">What is the maximum video quality I can download?</h3>
+                  <p className="text-gray-400">Downifi always fetches the highest resolution the source platform makes available — typically 1080p Full HD for TikTok and Instagram, and up to 4K for Facebook videos when the uploader provides that quality. You always get the original bitrate, never a re-encoded copy.</p>
+              </div>
+
+              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3">Why isn't my video link working?</h3>
+                  <p className="text-gray-400">The most common reasons: the post is private, the account is restricted, the link points to a photo rather than a video, or the URL was copied incompletely. Make sure the video is publicly viewable and that the link starts with <code className="text-primary">https://</code>.</p>
+              </div>
+
+              <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
                   <h3 className="text-xl font-bold text-white mb-3">Is it legal to download social media videos?</h3>
-                  <p className="text-gray-400">Downloading publicly available content for personal offline viewing is generally permitted. However, you must not use these files for commercial purposes or distribution without the original creator's permission.</p>
+                  <p className="text-gray-400">Downloading publicly available videos for personal, offline viewing is generally permitted under fair use. However, you must not redistribute, monetize, or re-upload copyrighted content without the original creator's written permission. When in doubt, credit the creator and ask first.</p>
               </div>
           </div>
       </div>

@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Cookie Policy - Downifi | Tracking & Transparency',
   description: 'Detailed Information about how Downifi uses cookies, including third-party advertising cookies from Google and how you can manage your preferences.',
+  robots: { index: false, follow: true },
 };
 
 export default function CookiePolicyPage() {

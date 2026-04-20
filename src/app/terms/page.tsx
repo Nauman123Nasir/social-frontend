@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Terms of Service - Downifi | Legal & Usage Guidelines',
   description: 'The formal Terms of Service for Downifi. Learn about your rights, responsibilities, and our site usage policies as a leading social media utility.',
+  robots: { index: false, follow: true },
 };
 
 export default function TermsOfServicePage() {

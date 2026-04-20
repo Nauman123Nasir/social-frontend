@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'DMCA Policy - Downifi | Copyright Compliance',
   description: 'Our Digital Millennium Copyright Act (DMCA) compliance policy. Learn how we handle copyright infringement claims as a technical intermediary.',
+  robots: { index: false, follow: true },
 };
 
 export default function DMCAPage() {

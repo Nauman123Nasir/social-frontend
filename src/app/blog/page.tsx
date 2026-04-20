@@ -5,8 +5,22 @@ import { ArrowRight, Clock } from 'lucide-react';
 import { posts } from '@/lib/blog-content';
 
 export const metadata: Metadata = {
-  title: 'Blog - Social Video Downloading Guides & Tips',
-  description: 'The ultimate collection of guides, tutorials, and tips on how to save high-quality social media videos from Instagram, TikTok, and more.',
+  title: 'Social Video Downloader Guides & Tutorials | Downifi Blog',
+  description: 'Step-by-step tutorials for downloading TikTok, Instagram, Facebook, and Twitter (X) videos in HD. Device-specific guides for iPhone, Android, PC & Mac — by Downifi.',
+  keywords: [
+    'social video downloader guides',
+    'how to download tiktok videos',
+    'how to save instagram reels',
+    'how to download facebook videos',
+    'twitter video downloader tutorial',
+  ],
+  alternates: { canonical: 'https://downifi.com/blog' },
+  openGraph: {
+    title: 'Social Video Downloader Guides & Tutorials | Downifi Blog',
+    description: 'Step-by-step tutorials for saving HD social media videos from TikTok, Instagram, Facebook, and X.',
+    url: 'https://downifi.com/blog',
+    type: 'website',
+  },
 };
 
 export default function BlogPage() {
@@ -63,7 +77,7 @@ export default function BlogPage() {
             </div>
 
             <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white group-hover:text-primary transition-colors leading-snug">
-              {post.title}
+              {post.title.replace(/\s*\|\s*Downifi.*$/, "")}
             </h2>
             
             <p className="text-gray-400 mb-8 flex-1 leading-relaxed text-lg line-clamp-3">

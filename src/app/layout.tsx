@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import SoftwareSchema from "../components/SoftwareSchema";
+import BrandSchema from "../components/BrandSchema";
 import CookieConsent from "../components/CookieConsent";
 import Header from "../components/Header";
 
@@ -12,6 +13,38 @@ export const metadata: Metadata = {
   title: "Downifi | Free Social Video Downloader (No Watermark)",
   description: "Download high-quality videos from Instagram, TikTok, Facebook, and Twitter (X) for free. Fast, secure, and no watermark required.",
   metadataBase: new URL("https://downifi.com"),
+  applicationName: "Downifi",
+  authors: [{ name: "Downifi", url: "https://downifi.com" }],
+  creator: "Downifi",
+  publisher: "Downifi",
+  keywords: [
+    "social video downloader",
+    "free video downloader",
+    "tiktok downloader",
+    "tiktok downloader no watermark",
+    "instagram video downloader",
+    "instagram reels downloader",
+    "facebook video downloader",
+    "twitter video downloader",
+    "x video downloader",
+    "download tiktok video",
+    "save instagram reel",
+    "hd video downloader",
+    "mp4 downloader online",
+    "no watermark",
+  ],
+  category: "Multimedia",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   alternates: {
     canonical: "/",
   },
@@ -42,7 +75,7 @@ export const metadata: Metadata = {
     apple: "/fav-icon.jpeg",
   },
   verification: {
-    google: "rhraJC_RqFc1szJJqz6cdoZxkICvgMu7N2EnlHp4NZ8",
+    google: "14hHg6jvoTVMC-e71S4kzuqIUgpr-KWOABeEa4NENbU",
   },
 };
 
@@ -55,6 +88,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <SoftwareSchema />
+        <BrandSchema />
       </head>
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">

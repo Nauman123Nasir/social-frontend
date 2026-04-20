@@ -4,8 +4,14 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, Calendar, Clock, Share2, ChevronRight } from 'lucide-react';
 import { posts } from '@/lib/blog-content';
 import { Button } from '@/components/ui/button';
+import BlogPostSchema from '@/components/BlogPostSchema';
+import FAQSchema from '@/components/FAQSchema';
 
 type Params = Promise<{ slug: string }>;
+
+export async function generateStaticParams() {
+  return posts.map((p) => ({ slug: p.slug }));
+}
 
 export async function generateMetadata(props: { params: Params }): Promise<Metadata> {
   const params = await props.params;
@@ -14,9 +20,31 @@ export async function generateMetadata(props: { params: Params }): Promise<Metad
 
   if (!post) return { title: 'Post Not Found' };
 
+  const url = `https://downifi.com/blog/${post.slug}`;
+  const image = post.bannerImage?.startsWith('http')
+    ? post.bannerImage
+    : `https://downifi.com${post.bannerImage ?? '/og-image.png'}`;
+
   return {
-    title: `${post.title} | Downifi Blog`,
+    title: post.title,
     description: post.excerpt,
+    keywords: post.keywords,
+    alternates: { canonical: url },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url,
+      type: 'article',
+      publishedTime: post.datePublished,
+      authors: [post.author],
+      images: [{ url: image, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: [image],
+    },
   };
 }
 
@@ -31,6 +59,16 @@ export default async function BlogPostPage(props: { params: Params }) {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white">
+      <BlogPostSchema
+        title={post.title}
+        description={post.excerpt}
+        slug={post.slug}
+        datePublished={post.datePublished}
+        author={post.author}
+        image={post.bannerImage}
+      />
+      <FAQSchema items={post.faq.map((f) => ({ question: f.question, answer: f.answer }))} />
+
       {/* Dynamic Hero Banner Section */}
       <div className="relative h-[40vh] md:h-[50vh] w-full overflow-hidden">
         {post.bannerImage ? (
@@ -60,7 +98,7 @@ export default async function BlogPostPage(props: { params: Params }) {
               Guides & Tutorials
             </Link>
             <h1 className="text-3xl md:text-6xl font-black text-white mb-6 tracking-tight leading-[1.1]">
-              {post.title}
+              {post.title.replace(/\s*\|\s*Downifi.*$/, "")}
             </h1>
             <div className="flex items-center gap-6 text-white/50 text-sm font-semibold uppercase tracking-wider">
                <div className="flex items-center">
@@ -95,8 +133,62 @@ export default async function BlogPostPage(props: { params: Params }) {
                 [&_li]:pl-2
               "
               style={{ "--tw-accent": post.themeColor } as any}
-              dangerouslySetInnerHTML={{ __html: post.content }} 
+              dangerouslySetInnerHTML={{ __html: post.content }}
             />
+
+            {/* FAQ Section (keyword-rich, PAA-eligible) */}
+            {post.faq && post.faq.length > 0 && (
+              <section className="mt-20 pt-12 border-t border-white/10">
+                <h2 className="text-3xl md:text-4xl font-black mb-8 bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent">
+                  Frequently Asked Questions
+                </h2>
+                <div className="space-y-4">
+                  {post.faq.map((item, i) => (
+                    <div
+                      key={i}
+                      className="p-6 md:p-8 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-primary/20 transition-colors"
+                    >
+                      <h3 className="text-lg md:text-xl font-bold text-white mb-3">
+                        {item.question}
+                      </h3>
+                      <p className="text-gray-400 leading-relaxed">{item.answer}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Related Posts (internal linking cluster) */}
+            {(() => {
+              const related = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+              if (related.length === 0) return null;
+              return (
+                <section className="mt-20 pt-12 border-t border-white/10">
+                  <h2 className="text-3xl md:text-4xl font-black mb-8 bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent">
+                    Related Guides
+                  </h2>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    {related.map((r) => (
+                      <Link
+                        key={r.slug}
+                        href={`/blog/${r.slug}`}
+                        className="group p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-primary/30 hover:bg-white/[0.05] transition-all"
+                      >
+                        <div
+                          className="text-xs font-bold uppercase tracking-widest mb-3"
+                          style={{ color: r.themeColor }}
+                        >
+                          {r.readTime}
+                        </div>
+                        <h3 className="text-base font-bold text-white group-hover:text-primary transition-colors leading-snug line-clamp-3">
+                          {r.title.replace(/\s*\|\s*Downifi.*$/, "")}
+                        </h3>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              );
+            })()}
 
             {/* Post Footer / CTA */}
             <div className="mt-20 pt-12 border-t border-white/10">

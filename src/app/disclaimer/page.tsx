@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Disclaimer - Downifi | Legal Disclosures',
   description: 'Our comprehensive legal disclaimer regarding the use of our social video downloader, external links, and the non-hosting of copyrighted content.',
+  robots: { index: false, follow: true },
 };
 
 export default function DisclaimerPage() {

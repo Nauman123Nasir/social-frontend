@@ -62,7 +62,7 @@ export default function RootLayout({
                 <div className="container mx-auto px-4 py-2 md:py-3 flex items-center justify-between">
                     <Link href="/" className="flex items-center hover:opacity-80 transition-transform hover:scale-105 duration-200">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src="/logo.png" alt="Downifi Logo" className="h-[84px] md:h-[104px] w-auto object-contain drop-shadow-lg" />
+                        <img src="/logo.png" alt="Downifi Logo" className="h-[50px] md:h-[60px] w-auto object-contain drop-shadow-lg" />
                     </Link>
 
                     <nav className="space-x-6 flex items-center text-sm hidden md:flex">

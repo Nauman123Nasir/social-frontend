@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Clock } from 'lucide-react';
 import { posts } from '@/lib/blog-content';
 
@@ -10,19 +11,38 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <div className="container mx-auto px-4 py-24 max-w-6xl">
-      <div className="text-center mb-20 animate-fade-in">
-        <h1 className="text-5xl md:text-7xl font-extrabold mb-8 gradient-text leading-tight pb-2">
-          Master the <span className="text-white">Download</span>
-        </h1>
+    <div className="w-full flex flex-col pb-24">
+      {/* Hero Banner Section */}
+      <section className="w-full relative py-32 px-4 flex flex-col items-center text-center overflow-hidden mb-20 border-b border-white/5 shadow-2xl">
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/blog-banner.png" 
+            alt="Downifi Blog Tech Banner" 
+            fill 
+            className="object-cover opacity-60 mix-blend-screen"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a14]/30 to-[#0a0a14]"></div>
+        </div>
+        
+        <div className="relative z-10 max-w-4xl mx-auto animate-fade-in-up">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            <span className="text-xs font-semibold text-gray-300 tracking-wider uppercase">Knowledge Base</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-8 gradient-text leading-tight pb-2 drop-shadow-lg">
+            Master the <span className="text-white">Download</span>
+          </h1>
 
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-          Expert guides, security tips, and the fastest workflows for archiving your favorite content from across the social web.
-        </p>
-      </div>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed shadow-sm">
+            Expert guides, security tips, and the fastest workflows for archiving your favorite content from across the social web.
+          </p>
+        </div>
+      </section>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        {posts.map((post) => (
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="grid md:grid-cols-2 gap-8">
+          {posts.map((post) => (
           <Link 
             key={post.id} 
             href={`/blog/${post.slug}`}
@@ -56,6 +76,7 @@ export default function BlogPage() {
           </Link>
         ))}
       </div>
+     </div>
     </div>
   );
 }

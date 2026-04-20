@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Mail, MapPin, Clock, Phone, Send, MessageSquare } from 'lucide-react';
 
 export default function ContactPage() {
@@ -38,18 +39,38 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-24 max-w-6xl">
-      <div className="text-center mb-16 animate-fade-in">
-        <h1 className="text-5xl md:text-7xl font-extrabold mb-8 gradient-text leading-tight pb-2">
-          Get in <span className="text-white">Touch</span>
-        </h1>
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-          Have feedback or technical questions? Our specialized support team is here to ensure your experience with Downifi remains premium and efficient.
-        </p>
-      </div>
+    <div className="w-full flex flex-col pb-24">
+      {/* Hero Banner Section */}
+      <section className="w-full relative py-32 px-4 flex flex-col items-center text-center overflow-hidden mb-16 border-b border-white/5 shadow-2xl">
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/contact-banner.png" 
+            alt="Downifi Contact Tech Banner" 
+            fill 
+            className="object-cover opacity-60 mix-blend-screen"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a14]/30 to-[#0a0a14]"></div>
+        </div>
+        
+        <div className="relative z-10 max-w-4xl mx-auto animate-fade-in-up">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            <span className="text-xs font-semibold text-gray-300 tracking-wider uppercase">Support Operations</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-8 gradient-text leading-tight pb-2 drop-shadow-lg">
+            Get in <span className="text-white">Touch</span>
+          </h1>
 
-      <div className="grid lg:grid-cols-3 gap-12">
-        {/* Contact Info Card */}
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed shadow-sm">
+            Have feedback or technical questions? Our specialized support team is here to ensure your experience with Downifi remains premium and efficient.
+          </p>
+        </div>
+      </section>
+
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="grid lg:grid-cols-3 gap-12">
+          {/* Contact Info Card */}
         <div className="lg:col-span-1">
           <div className="glass-effect p-8 rounded-3xl border border-white/5 hover:border-primary/20 transition-all group">
             <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
@@ -193,5 +214,6 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
+   </div>
   );
 }

@@ -173,18 +173,46 @@ export default function Home() {
               )}
             </AnimatePresence>
           </div>
-          <Button 
-            type="submit" 
-            className="h-14 px-8 text-lg font-bold rounded-xl bg-primary hover:bg-primary/80 transition-all duration-200"
-            disabled={isLoading}
-            suppressHydrationWarning
-          >
-            {isLoading ? <Loader2 className="animate-spin h-5 w-5 mr-2" /> : <Download className="h-5 w-5 mr-2" />}
-            {isLoading ? "Processing..." : "Download"}
-          </Button>
+          <AnimatePresence>
+            {validateUrl(url) && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, width: 0 }}
+                animate={{ opacity: 1, scale: 1, width: 'auto' }}
+                exit={{ opacity: 0, scale: 0.95, width: 0 }}
+                transition={{ duration: 0.2 }}
+                className="flex-shrink-0"
+              >
+                <Button 
+                  type="submit" 
+                  className="h-14 w-full md:w-auto px-8 text-lg font-bold rounded-xl bg-primary hover:bg-primary/80 transition-all duration-200"
+                  disabled={isLoading}
+                  suppressHydrationWarning
+                >
+                  {isLoading ? <Loader2 className="animate-spin h-5 w-5 mr-2" /> : <Download className="h-5 w-5 mr-2" />}
+                  {isLoading ? "Processing..." : "Download"}
+                </Button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </form>
 
-
+        {/* Invalid URL State */}
+        <AnimatePresence>
+          {url.length > 5 && !validateUrl(url) && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, y: -10 }}
+              animate={{ opacity: 1, height: 'auto', y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="mt-4 px-4 py-3 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-200/90 flex items-center justify-center shadow-[0_0_15px_rgba(249,115,22,0.05)] overflow-hidden"
+            >
+              <AlertCircle className="h-5 w-5 mr-3 text-orange-400 flex-shrink-0" />
+              <span className="text-sm font-medium tracking-wide">
+                Please enter a valid link from <strong className="text-orange-300">Instagram, Facebook, TikTok, or Twitter</strong>.
+              </span>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Error State */}
         <AnimatePresence mode="wait">

@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import SoftwareSchema from "../components/SoftwareSchema";
 import CookieConsent from "../components/CookieConsent";
+import Header from "../components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -57,23 +58,8 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
-            {/* Header placeholder */}
-            <header className="border-b border-white/10 glass-effect sticky top-0 z-50">
-                <div className="container mx-auto px-4 py-2 md:py-3 flex items-center justify-between">
-                    <Link href="/" className="flex items-center hover:opacity-80 transition-transform hover:scale-105 duration-200">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src="/logo.png" alt="Downifi Logo" className="h-[50px] md:h-[60px] w-auto object-contain drop-shadow-lg" />
-                    </Link>
-
-                    <nav className="space-x-6 flex items-center text-sm hidden md:flex">
-                        <a href="/" className="hover:text-primary transition font-medium">Home</a>
-                        <a href="/about" className="hover:text-primary transition font-medium">About</a>
-                        <a href="/blog" className="hover:text-primary transition font-medium">Blog</a>
-                        <a href="/contact" className="hover:text-primary transition font-medium">Contact</a>
-                    </nav>
-
-                </div>
-            </header>
+            {/* Mobile-Responsive Header */}
+            <Header />
             
             <main className="flex-1 gradient-bg">
                 {children}

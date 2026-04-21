@@ -371,16 +371,22 @@ export default function Home() {
                                     <a
                                         href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(videoInfo.formats[0].url)}&title=${encodeURIComponent((videoInfo.title || 'video').replace(/\s+/g, '_'))}&ext=${encodeURIComponent(videoInfo.formats[0].ext || 'mp4')}&needs_merging=${videoInfo.formats[0].needs_merging || false}&original_url=${encodeURIComponent(extractedUrl)}`}
                                         download
-                                        target="_blank"
+                                        target={isIOS ? "_self" : "_blank"}
                                         rel="noopener noreferrer"
                                     >
                                         <Download className="h-5 w-5 mr-2" /> Download Video
                                     </a>
                                 </Button>
                                 
-                                <p className="text-[10px] text-gray-500 font-medium">
-                                    Full quality extraction • No watermarks
-                                </p>
+                                {isIOS ? (
+                                    <p className="text-[10px] text-primary/70 font-bold uppercase tracking-wider animate-pulse">
+                                        Tap Download • Then check your Files app
+                                    </p>
+                                ) : (
+                                    <p className="text-[10px] text-gray-500 font-medium">
+                                        Full quality extraction • No watermarks
+                                    </p>
+                                )}
                             </div>
                         </div>
                     ) : (

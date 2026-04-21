@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Download, Link as LinkIcon, Loader2, PlayCircle, AlertCircle, Instagram, Facebook, Twitter, Clipboard, X } from "lucide-react"
+import { Download, Link as LinkIcon, Loader2, PlayCircle, AlertCircle, Instagram, Facebook, Twitter, Clipboard, X, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import axios from "axios"
@@ -43,6 +43,8 @@ export default function Home() {
   const [error, setError] = useState("")
   const [videoInfo, setVideoInfo] = useState<any>(null)
   const [isIOS, setIsIOS] = useState(false)
+  const [isDownloading, setIsDownloading] = useState(false)
+  const [isLongDownload, setIsLongDownload] = useState(false)
   const resultsRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -121,6 +123,49 @@ export default function Home() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const handleDownload = () => {
+    if (!videoInfo) return;
+    
+    // Generate a unique token for this download session
+    const token = Math.random().toString(36).substring(2, 10);
+    
+    setIsDownloading(true);
+    setIsLongDownload(false);
+    
+    // Show "Almost there" message after 5 seconds
+    const longDownloadTimeout = setTimeout(() => {
+      setIsLongDownload(true);
+    }, 5000);
+    
+    // Construct the backend URL with the token
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+    const downloadLink = `${backendUrl}/api/download?url=${encodeURIComponent(videoInfo.formats[0].url)}&title=${encodeURIComponent((videoInfo.title || 'video').replace(/\s+/g, '_'))}&ext=${encodeURIComponent(videoInfo.formats[0].ext || 'mp4')}&needs_merging=${videoInfo.formats[0].needs_merging || false}&original_url=${encodeURIComponent(extractedUrl)}&token=${token}`;
+    
+    // Trigger the download
+    window.location.href = downloadLink;
+    
+    // Polling function to check for the "download started" cookie
+    const checkCookie = setInterval(() => {
+      const cookieName = `download_started_${token}`;
+      if (document.cookie.split(';').some((item) => item.trim().startsWith(`${cookieName}=`))) {
+        // Cookie found! Download has started.
+        setIsDownloading(false);
+        clearTimeout(longDownloadTimeout);
+        clearInterval(checkCookie);
+        
+        // Clean up the cookie
+        document.cookie = `${cookieName}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+      }
+    }, 500);
+
+    // Safety timeout: Automatically hide the loader after 45 seconds if cookie is never found
+    setTimeout(() => {
+      clearInterval(checkCookie);
+      setIsDownloading(false);
+      clearTimeout(longDownloadTimeout);
+    }, 45000); 
   }
 
   return (
@@ -367,15 +412,13 @@ export default function Home() {
                                     )}
                                 </div>
                                 
-                                <Button size="lg" asChild className="w-full rounded-xl font-bold px-6 py-4 h-auto shadow-lg shadow-primary/10 hover:scale-[1.01] active:scale-95 transition-all bg-primary hover:bg-primary/90 text-black" suppressHydrationWarning>
-                                    <a
-                                        href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/download?url=${encodeURIComponent(videoInfo.formats[0].url)}&title=${encodeURIComponent((videoInfo.title || 'video').replace(/\s+/g, '_'))}&ext=${encodeURIComponent(videoInfo.formats[0].ext || 'mp4')}&needs_merging=${videoInfo.formats[0].needs_merging || false}&original_url=${encodeURIComponent(extractedUrl)}`}
-                                        download
-                                        target={isIOS ? "_self" : "_blank"}
-                                        rel="noopener noreferrer"
-                                    >
-                                        <Download className="h-5 w-5 mr-2" /> Download Video
-                                    </a>
+                                <Button 
+                                    size="lg" 
+                                    onClick={handleDownload}
+                                    className="w-full rounded-xl font-bold px-6 py-4 h-auto shadow-lg shadow-primary/10 hover:scale-[1.01] active:scale-95 transition-all bg-primary hover:bg-primary/90 text-black" 
+                                    suppressHydrationWarning
+                                >
+                                    <Download className="h-5 w-5 mr-text mr-2" /> Download Video
                                 </Button>
                                 
                                 {isIOS ? (
@@ -568,6 +611,122 @@ export default function Home() {
               </div>
           </div>
       </div>
+      {/* Download Overlay Loader */}
+      <AnimatePresence>
+        {isDownloading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl"
+          >
+            <div className="flex flex-col items-center justify-center text-center max-w-2xl mx-auto">
+              {/* Premium Loader Illustration */}
+              <div className="relative mb-12">
+                  <motion.div 
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="absolute inset-0 bg-primary/20 rounded-full blur-[80px] scale-150 animate-pulse"
+                  ></motion.div>
+                  
+                  <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="relative glass-effect p-12 md:p-16 rounded-[40px] border-white/10 shadow-2xl"
+                  >
+                      <div className="relative">
+                          <Loader2 className="h-20 w-20 md:h-24 md:w-24 text-primary animate-spin" />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                              <Download className="h-8 w-8 text-white/40 animate-bounce" />
+                          </div>
+                      </div>
+                  </motion.div>
+
+                  <motion.div 
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.5, type: "spring" }}
+                    className="absolute -top-4 -right-4 bg-primary text-black font-black text-xs px-4 py-2 rounded-full shadow-xl shadow-primary/20 rotate-12"
+                  >
+                    HD
+                  </motion.div>
+              </div>
+
+              {/* Main Text */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                  <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight leading-tight">
+                    Preparing Your <span className="gradient-text">High-Quality</span> File
+                  </h2>
+                  
+                  <p className="text-lg md:text-xl text-gray-400 max-w-lg mx-auto mb-10 leading-relaxed font-medium">
+                    Fetching direct MP4 stream for <br/>
+                    <span className="text-white bg-white/5 border border-white/10 px-3 py-1 rounded-lg mt-2 inline-block shadow-sm text-base md:text-lg">
+                       "{videoInfo?.title?.length > 50 ? videoInfo.title.substring(0, 50) + '...' : videoInfo?.title || 'video'}"
+                    </span>
+                  </p>
+              </motion.div>
+
+              <div className="flex flex-col items-center gap-4">
+                  <div className="flex items-center gap-4 px-8 py-4 rounded-3xl bg-white/[0.03] border border-white/5 text-gray-400 font-bold tracking-wide shadow-inner text-sm">
+                    <div className="flex gap-1.5">
+                        <span className="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                        <span className="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                        <span className="w-2 h-2 bg-primary rounded-full animate-bounce"></span>
+                    </div>
+                    {isLongDownload ? "Finalizing HD Streams..." : "Connecting to Secure CDN"}
+                  </div>
+                  
+                  {isLongDownload && (
+                    <motion.p 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="text-xs text-primary/70 font-bold uppercase tracking-widest animate-pulse"
+                    >
+                      Almost there • High quality merging takes a moment
+                    </motion.p>
+                  )}
+                  
+                  <p className="text-[10px] text-gray-600 font-black uppercase tracking-[0.3em]">
+                    Safe • Fast • Watermark-Free
+                  </p>
+              </div>
+
+              {/* Info Notice */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="mt-12 p-6 rounded-[32px] bg-white/[0.02] border border-white/5 max-w-lg relative overflow-hidden group"
+              >
+                <div className="flex items-start gap-4">
+                    <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
+                        <Info className="h-5 w-5 text-primary" />
+                    </div>
+                    <div className="text-left text-xs md:text-sm">
+                        <p className="text-gray-500 leading-relaxed font-medium">
+                            To bypass platform watermarks, we fetch and merge secure video streams in real-time. This ensures the file is natively compatible with your device.
+                        </p>
+                    </div>
+                </div>
+              </motion.div>
+              
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setIsDownloading(false)}
+                className="mt-8 text-gray-500 hover:text-white"
+              >
+                Close Loader
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

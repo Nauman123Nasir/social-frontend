@@ -146,23 +146,25 @@ export default function Home() {
     // Trigger the download
     window.location.href = downloadLink;
     
-    // Polling function to check for the "download started" cookie
-    const checkCookie = setInterval(() => {
-      const cookieName = `download_started_${token}`;
-      if (document.cookie.split(';').some((item) => item.trim().startsWith(`${cookieName}=`))) {
-        // Cookie found! Download has started.
-        setIsDownloading(false);
-        clearTimeout(longDownloadTimeout);
-        clearInterval(checkCookie);
-        
-        // Clean up the cookie
-        document.cookie = `${cookieName}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+    // Polling function to check for the "download started" status via API
+    // This is cross-origin compatible and more robust than cookies
+    const checkStatus = setInterval(async () => {
+      try {
+        const response = await axios.get(`${backendUrl}/api/download-status/${token}`);
+        if (response.data.started) {
+          // Status found! Download has started.
+          setIsDownloading(false);
+          clearTimeout(longDownloadTimeout);
+          clearInterval(checkStatus);
+        }
+      } catch (err) {
+        // Silently continue polling on error
       }
-    }, 500);
+    }, 1000);
 
-    // Safety timeout: Automatically hide the loader after 45 seconds if cookie is never found
+    // Safety timeout: Automatically hide the loader after 45 seconds if status is never found
     setTimeout(() => {
-      clearInterval(checkCookie);
+      clearInterval(checkStatus);
       setIsDownloading(false);
       clearTimeout(longDownloadTimeout);
     }, 45000); 

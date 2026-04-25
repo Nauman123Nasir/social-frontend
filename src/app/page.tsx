@@ -185,7 +185,7 @@ export default function Home() {
           Free Social <span className="gradient-text">Video Downloader</span>
         </h1>
         <p className="text-xl text-gray-400 mb-4 max-w-2xl mx-auto">
-          Download HD videos from <strong className="text-white">TikTok, Instagram, Facebook, and X (Twitter)</strong> in one click — no watermark, no app, no signup.
+          Download HD videos from <strong className="text-white">TikTok, Instagram, Facebook, and X (Twitter)</strong> in one click — in original quality, no app, no signup.
         </p>
         <p className="text-sm text-gray-500 max-w-2xl mx-auto">
           Paste any public video link below to save Reels, Shorts, Stories, and posts in MP4 at full 1080p quality. Works on iPhone, Android, PC, and Mac.
@@ -429,7 +429,7 @@ export default function Home() {
                                     </p>
                                 ) : (
                                     <p className="text-[10px] text-gray-500 font-medium">
-                                        Full quality extraction • No watermarks
+                                        Full quality extraction • Original source format
                                     </p>
                                 )}
                             </div>
@@ -483,9 +483,9 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-8">
               <div className="p-8 rounded-2xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
-                  <h3 className="text-2xl font-bold text-white mb-3">TikTok Downloader — No Watermark</h3>
+                  <h3 className="text-2xl font-bold text-white mb-3">TikTok Downloader — Original Quality</h3>
                   <p className="text-gray-400 leading-relaxed">
-                    Save TikTok videos without the logo or username overlay. Downifi fetches the clean, watermark-free MP4 file so your saved clips look exactly like the original upload. Supports <strong className="text-white">TikTok Shorts</strong>, <strong className="text-white">story clips</strong>, and long-form TikTok videos on both iPhone and Android.
+                    Access original TikTok source files. Downifi helps you download the clean MP4 file before any platform-specific compression is added. Supports <strong className="text-white">TikTok Shorts</strong>, <strong className="text-white">story clips</strong>, and long-form TikTok videos on both iPhone and Android.
                   </p>
               </div>
               <div className="p-8 rounded-2xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
@@ -497,7 +497,7 @@ export default function Home() {
               <div className="p-8 rounded-2xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
                   <h3 className="text-2xl font-bold text-white mb-3">Facebook Video Downloader (HD)</h3>
                   <p className="text-gray-400 leading-relaxed">
-                    Download public Facebook videos, Reels, and watch clips in high definition. Downifi bypasses the in-app viewer and gives you a direct MP4 link — perfect for saving tutorials, news clips, and memorable moments to your camera roll or PC.
+                    Download public Facebook videos, Reels, and watch clips in high definition. Downifi accesses the direct source stream and gives you a direct MP4 link — perfect for saving tutorials, news clips, and memorable moments to your camera roll or PC.
                   </p>
               </div>
               <div className="p-8 rounded-2xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
@@ -533,9 +533,9 @@ export default function Home() {
                   </p>
               </div>
               <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-white">Watermark-Free TikTok &amp; Reels</h3>
+                  <h3 className="text-2xl font-bold text-white">Original Source TikTok &amp; Reels</h3>
                   <p className="text-gray-400 leading-relaxed">
-                    Save TikTok videos and Instagram Reels without the visible TikTok logo, @username stamp, or Instagram watermark. Downifi requests the raw source file whenever the platform exposes it, so your archive stays clean and reusable.
+                    Save your TikTok videos and Instagram Reels in their original format. Downifi requests the raw source file whenever the platform exposes it, so your personal archive stays clean and high-quality.
                   </p>
               </div>
                <div className="space-y-4">
@@ -610,6 +610,15 @@ export default function Home() {
               <div className="p-8 rounded-3xl glass-effect border border-white/5 hover:border-primary/20 transition-colors">
                   <h3 className="text-xl font-bold text-white mb-3">Is it legal to download social media videos?</h3>
                   <p className="text-gray-400">Downloading publicly available videos for personal, offline viewing is generally permitted under fair use. However, you must not redistribute, monetize, or re-upload copyrighted content without the original creator's written permission. When in doubt, credit the creator and ask first.</p>
+              </div>
+
+              <div className="p-8 rounded-3xl glass-effect border border-red-500/20 bg-red-500/5 mt-8">
+                  <h3 className="text-xl font-bold text-red-400 mb-3 flex items-center gap-2">
+                    <AlertCircle className="h-5 w-5" /> Terms of Service & Legal Disclaimer
+                  </h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    By using Downifi, you agree to only download content for personal use or content for which you have explicit permission from the copyright owner. Downifi does not host any media files on its servers and acts solely as an indexing tool to locate original file paths. Downloading copyrighted material without permission is against our terms and may violate the law.
+                  </p>
               </div>
           </div>
       </div>
@@ -694,7 +703,7 @@ export default function Home() {
                   )}
                   
                   <p className="text-[10px] text-gray-600 font-black uppercase tracking-[0.3em]">
-                    Safe • Fast • Watermark-Free
+                    Safe • Fast • Original Quality
                   </p>
               </div>
 
@@ -711,7 +720,7 @@ export default function Home() {
                     </div>
                     <div className="text-left text-xs md:text-sm">
                         <p className="text-gray-500 leading-relaxed font-medium">
-                            To bypass platform watermarks, we fetch and merge secure video streams in real-time. This ensures the file is natively compatible with your device.
+                            To provide the highest quality, we fetch and merge secure video streams in real-time. This ensures the file is natively compatible with your device.
                         </p>
                     </div>
                 </div>

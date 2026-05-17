@@ -14,7 +14,7 @@ export interface DownloaderTemplateProps {
   titleSuffix: string;
   subtitle: React.ReactNode;
   placeholder?: string;
-  howToSteps: { name: string; text: string }[];
+  howToSteps: { title: string; desc: string }[];
   faqItems: { question: string; answer: string }[];
   schemas?: React.ReactNode;
   gradientClass?: string;

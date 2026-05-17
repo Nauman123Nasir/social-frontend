@@ -124,12 +124,20 @@ export default function RootLayout({
                         </div>
 
                         {/* Link Grid */}
-                        <div className="flex flex-col items-center space-y-6 w-full">
+                        <div className="flex flex-col items-center space-y-8 w-full mt-6">
+                            {/* Primary Tools Navigation */}
+                            <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-semibold">
+                                <a href="/tiktok-video-downloader" className="text-gray-300 hover:text-white transition">TikTok Downloader</a>
+                                <a href="/instagram-reels-downloader" className="text-gray-300 hover:text-white transition">Instagram Reels Downloader</a>
+                                <a href="/facebook-video-downloader" className="text-gray-300 hover:text-white transition">Facebook Video Downloader</a>
+                                <a href="/twitter-video-downloader" className="text-gray-300 hover:text-white transition">Twitter (X) Downloader</a>
+                            </div>
+
+                            {/* Secondary Navigation */}
                             <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">
                                 <a href="/" className="text-gray-400 hover:text-white transition">Home</a>
-                                <a href="/blog" className="text-blue-400 hover:text-blue-300 font-semibold transition">How to Download</a>
+                                <a href="/blog" className="text-blue-400 hover:text-blue-300 font-semibold transition">Blog & Guides</a>
                                 <a href="/about" className="text-gray-400 hover:text-white transition">About Us</a>
-
                                 <a href="/contact" className="text-gray-400 hover:text-white transition">Contact</a>
                                 <a href="/privacy" className="text-gray-400 hover:text-white transition">Privacy Policy</a>
                                 <a href="/terms" className="text-gray-400 hover:text-white transition">Terms of Service</a>

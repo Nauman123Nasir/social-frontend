@@ -13,9 +13,10 @@ export default function Header() {
 
   const links = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/contact" },
+    { name: "TikTok", href: "/tiktok-video-downloader" },
+    { name: "Instagram", href: "/instagram-reels-downloader" },
+    { name: "Facebook", href: "/facebook-video-downloader" },
+    { name: "Twitter (X)", href: "/twitter-video-downloader" },
   ];
 
   return (
